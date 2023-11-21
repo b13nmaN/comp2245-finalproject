@@ -1,8 +1,7 @@
 
 <?php
-dd($fetch_user_table)
+dd(getTable('users'));
 ?>
 <main>
     <h2>Home</h2>
-    <!-- <p><?= $fetch_user_table['username'] ?></p> -->
 </main>
