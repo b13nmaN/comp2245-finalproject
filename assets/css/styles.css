@@ -1,0 +1,26 @@
+
+.container {
+    display: grid;
+    grid-template-columns: 20% 75%;
+    gap: 5%;
+}
+
+nav {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+main {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+header {
+    grid-column: span 2;
+    grid-row: 1;
+}
+
+footer {
+    grid-column: span 2;
+    grid-row: 3;
+}
