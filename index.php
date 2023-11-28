@@ -3,7 +3,6 @@ require 'config/config.php';
 require 'includes/helpers.php';
 ?>
 
-
 <?php include 'template/header.php'; ?>
 <?php include 'template/sidebar.php'; ?>
 <?php 

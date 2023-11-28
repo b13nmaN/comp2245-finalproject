@@ -30,10 +30,20 @@ function loadPage(page) {
     fetch(page)
         .then(response => response.text())
         .then(data => {
+            //parse html to get main
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, 'text/html');
+            console.log(doc);
+
+            let main = doc.querySelector('main')
+            let mainToString = main.innerHTML
+            console.log(main);
+
             // Update the content area with the loaded HTML
-            document.querySelector('main ').innerHTML = data; // Use querySelector instead of getElementsByClassName
+            document.querySelector('main').innerHTML = mainToString; // Use querySelector instead of getElementsByClassName
         })
         .catch(error => console.error('Error:', error));
 }
+
 
 
