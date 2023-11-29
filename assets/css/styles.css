@@ -1,18 +1,28 @@
-/* Variables */
-
-/* reset styles */
+/* Reset styles */
 * {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-/* general styles */
 
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
 
+/* Variables */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+}
 
-
-/* 2 column Layout */
+/* 2 Column Layout */
 .container {
+    height: 100vh;
     display: grid;
     grid-template-columns: 20% 75%;
+    grid-template-rows: 10% 90%;
     gap: 5%;
 }
 
@@ -26,21 +36,21 @@ main {
     grid-row: 2;
 }
 
+
+
+/* Header styles */
 header {
-    background-color: aliceblue;
+    background-color: var(--primary-color);
     grid-column: span 2;
     grid-row: 1;
-}
-
-footer {
-    grid-column: span 2;
-    grid-row: 3;
-}
-
-/* header stlyes */
-
-.logo {
-    background-color: red;
-    height: 100px;
+    padding: 1rem;
 }
 /* Sidebar Styles */
+
+/* home page styles */
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+}

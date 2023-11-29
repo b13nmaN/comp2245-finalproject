@@ -24,6 +24,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initial load (you can specify the default page to load)
     // loadPage('pages/home.php');
+
+    // get Requested filter
+    document.querySelector('#sales-lead').addEventListener('click', async ()=>{
+        await handleFilterRequest('sales-lead')
+    })
+
+    document.querySelector('#support').addEventListener('click', async ()=>{
+        await handleFilterRequest('support')
+    })
 });
 
 function loadPage(page) {
@@ -43,7 +52,29 @@ function loadPage(page) {
             document.querySelector('main').innerHTML = mainToString; // Use querySelector instead of getElementsByClassName
         })
         .catch(error => console.error('Error:', error));
+
+    }
+
+    // handler functions
+
+async function handleFilterRequest(filterType) {
+	await fetch('/comp2245-finalproject/index.php/home?filterType=' + filterType)
+        .then(response => response.text())
+        .then(data => {
+            //parse html to get main
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, 'text/html');
+            let main = doc.querySelector('table')
+            let mainToString = main.innerHTML
+            console.log(mainToString);
+
+            // Update the content area with the loaded HTML
+            document.querySelector('.filter').innerHTML = mainToString;
+            console.log(doc);
+        })
 }
+
+
 
 
 

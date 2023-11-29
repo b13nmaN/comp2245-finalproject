@@ -1,9 +1,6 @@
 
-    <footer>
-        <p>Copyright 2023, Joel</p>
-    </footer>
+    <i class="fa-solid fa-user"></i>
     <script src="../assets/js/app.js"></script>
-    <div class="content"></div>
 </div>
 </body>
 </html>

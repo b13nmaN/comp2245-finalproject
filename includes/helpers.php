@@ -21,4 +21,4 @@ function getTable($table_name) {
 }
 
 
-?>
+

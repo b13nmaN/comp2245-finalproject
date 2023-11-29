@@ -1,24 +1,49 @@
 
+<?php
+$filterType = $_GET['filterType'] ?? null;
+var_dump($filterType);
+// $sanitizedInput = vailate_sanitize($filterType);
+// $filteredArr = getFilterRequest($sanitizedInput);
+
+?>
+
+
+
 
 <main>
-  
-    <h3>Dashboard</h3>
-    <p>Welcome to your dashboard. Here you can see some useful information and statistics.</p>
-    <div class="row">
-      <div class="card">
-        <h4>Users</h4>
-        <p>There are 123 users registered on your website.</p>
-      </div>
-      <div class="card">
-        <h4>Posts</h4>
-        <p>There are 456 posts published on your blog.</p>
-      </div>
-      <div class="card">
-        <h4>Comments</h4>
-        <p>There are 789 comments posted by your readers.</p>
-      </div>
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <h2>Dashboard</h2>
+            <button id="add-contact">add contact</button>
+        </div>
+        <div class="dashboard-main">
+            <button id="sales-lead">saleslead</button>
+            <button id="support">support</button>
+            <div class="filter">
+                
+                <?php if ($filterType == 'sales-lead'):
+                var_dump($filterType);
+                ?>
+                
+                <table>
+                    <tr>
+                        <th>sales lead</th>
+                    </tr>
+                </table>
+            <?php else: ?>
+                <?php if ($filterType == 'support'):
+                    var_dump($filterType);
+                     ?>
+                <table>
+                    <tr>
+                        <th>support</th>
+                    </tr>
+                </table>
+                <?php endif; ?>
+                <?php endif; ?>
+            </div>
+        </div>
     </div>
-
-
+    <div class="type"></div>
 </main>
 
