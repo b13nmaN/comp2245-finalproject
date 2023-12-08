@@ -78,24 +78,24 @@ header {
     
 }
 form {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* create two equal columns */
-    grid-auto-rows: minmax(40px, auto); /* set the minimum and maximum height of the rows */
-    grid-gap: 10px; /* add some space between the grid items */
-    align-items: center; /* vertically align the grid items */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* create two equal columns */
+  grid-auto-rows: minmax(40px, auto); /* set the minimum and maximum height of the rows */
+  grid-gap: 10px; /* add some space between the grid items */
+  align-items: center; /* vertically align the grid items */
 }
 
 label {
-    grid-column: 1; /* place the labels in the first column */
+  grid-column: 1; /* place the labels in the first column */
 }
 
 input, select {
-    grid-column: 2; /* place the inputs and selects in the second column */
+  grid-column: 2; /* place the inputs and selects in the second column */
 }
 
 input[type="submit"] {
-    grid-column: 1 / 3; /* span the submit button across both columns */
-    justify-self: center; /* horizontally center the button */
+  grid-column: 1 / 3; /* span the submit button across both columns */
+  justify-self: center; /* horizontally center the button */
 }
 
 label {

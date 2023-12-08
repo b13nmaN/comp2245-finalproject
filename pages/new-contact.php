@@ -1,11 +1,9 @@
 
 
 <main>
+    <h1>New Contact</h1>
     <div class="contact-container">
-        <div class="contact-header">
-            <h1>New Contact</h1>
-        </div>
-        <form action="process-new-contact.php" method="post">
+        <form action="includes/process-new-contact.php" method="post">
             <select id="Title" name="Title">
                 <option value="Mr">Mr</option>
                 <option value="Ms">Ms</option>
