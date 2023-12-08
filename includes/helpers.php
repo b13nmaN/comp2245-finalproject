@@ -129,6 +129,19 @@ function addNewContact($conn, $title, $fname, $lname, $email, $telephone, $compa
     return $stmt->rowCount() > 0;
 }
 
+function getAllContacts($conn) {
+    // Your retrieve all contacts logic here
+    $query = "SELECT * FROM contacts";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+
+    // Fetch all contacts as an associative array
+    $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $contacts;
+}
+
+
 // Function to filter contacts
 function getFilterRequest($conn, $filterType){
     // Implement logic to filter contacts based on filterType
