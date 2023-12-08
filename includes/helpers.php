@@ -98,7 +98,7 @@ function getAllUsers($conn, $role){
 }
 
 // Function to add a new contact
-function addNewContact($conn, $userid, $title, $fname, $lname, $email, $telephone, $company, $type, $assigned_to){
+function addNewContact($conn, $title, $fname, $lname, $email, $telephone, $company, $type, $assigned_to){
     // Example of using validate_sanitize function
     $sanitizedTitle = validate_sanitize($title);
     $sanitizedFname = validate_sanitize($fname);
@@ -111,9 +111,8 @@ function addNewContact($conn, $userid, $title, $fname, $lname, $email, $telephon
 
     // Your add new contact logic here
     // Placeholder logic, you need to replace this with actual logic
-    $query = "INSERT INTO contacts (userid, title, fname, lname, email, telephone, company, type, assigned_to, created_at, updated_at) VALUES (:userid, :title, :fname, :lname, :email, :telephone, :company, :type, :assigned_to, NOW(), NOW())";
+    $query = "INSERT INTO contacts ( title, fname, lname, email, telephone, company, type, assigned_to, created_at, updated_at) VALUES ( :title, :fname, :lname, :email, :telephone, :company, :type, :assigned_to, NOW(), NOW())";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':userid', $userid);
     $stmt->bindParam(':title', $sanitizedTitle);
     $stmt->bindParam(':fname', $sanitizedFname);
     $stmt->bindParam(':lname', $sanitizedLname);
@@ -213,7 +212,7 @@ function loadNotes($conn, $id){
 }
 
 
-// Create functions to valite different form inputs
+// Create functions to valite email and telephone number
 
 ?>
 
