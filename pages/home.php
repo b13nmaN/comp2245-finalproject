@@ -16,12 +16,13 @@ var_dump($filterType);
         <button class="add-contact">Add Contact</button>
     </div>
     <div class="dashboard-main">
+
        <div class="filters">
-        <p>Filters</p>
-        <button id="all">All</button>
-        <button id="sales-lead">Sales Lead</button>
-        <button id="support">Support</button>
-        <button id="assigned-to-me">Assigned to me</button>
+        <p><span><img src="../assets/images/filter.svg" alt="filter-icon"></span>Filter by:</p>
+        <p id="all">All</p>
+        <p id="sales-lead">Sales Lead</p>
+        <p id="support">Support</p>
+        <p id="assigned-to-me">Assigned to me</p>
        </div>
     </div>
 </main>

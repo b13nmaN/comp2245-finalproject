@@ -147,7 +147,16 @@ input:focus {
     background-color: #4f46e5e5;
 }
 
-/* dashboard styles */
+/* Dashboard styles */
+
+.dashboard-main {
+    background: #fff;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-height: 600px;
+}
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -174,4 +183,33 @@ input:focus {
     width: auto;
     vertical-align: middle;
     line-height: 0;
+}
+
+
+.filters {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+.filters :first-child {
+    font-weight: 600;
+}
+
+.filters :not(:first-child) {
+    color: #ccc;
+    margin-left: 20px;
+}
+
+/* fix hover effect */
+.filters :not(:first-child):hover {
+    color: #ccc;
+    cursor: pointer;
+    border-bottom: 2px solid var(--color-purple);
+    transition: 100ms ease;
+}
+
+.filters p span img {
+    vertical-align: middle;
 }
