@@ -80,18 +80,20 @@ function newUser($conn, $userName, $password, $role){
 }
 
 // Function to get all users
-function getAllUsers($conn, $role){
-    // Example of using validate_sanitize function
-    $sanitizedRole = validate_sanitize($role);
+function getAllUsers($conn){
 
-    // Your get all users logic here
-    // Placeholder logic, you need to replace this with actual logic
-    $query = "SELECT name, email, role, created_at FROM users WHERE role = :role";
+    // Prepare the SQL query with a parameter
+    $query = "SELECT firstname, lastname, email FROM users WHERE id = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':role', $sanitizedRole);
+
+    // Bind the parameter with a value
+    $id = 1; // You can change this value as needed
+    $stmt->bindParam(1, $id);
+
+    // Execute the query
     $stmt->execute();
 
-    // Fetch all users
+    // Fetch all users as an associative array
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     return $users;

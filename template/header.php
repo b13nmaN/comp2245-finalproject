@@ -12,6 +12,6 @@
 <body>
     <div class="container">
         <header>
-            <h2>Dolphin CRM</h2>
+            <p>Dolphin CRM</p>
         </header>
         
