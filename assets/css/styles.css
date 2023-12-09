@@ -108,6 +108,11 @@ aside nav ul li a {
     stroke-width: 1.5;
 }
 
+#filter-icon {
+    fill: #000;
+    vertical-align: middle;
+    margin-right: 10px;
+}
 
 
 
