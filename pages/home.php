@@ -2,9 +2,8 @@
 <?php
 // get filter type
 $filterType = $_GET['filterType'] ?? null;
-// var_dump($filterType);
-// $sanitizedInput = vailate_sanitize($filterType);
-// $filteredArr = getFilterRequest($sanitizedInput);
+$sanitizedInput = sanitize($filterType);
+$filteredArr = getFilterRequest($conn, $sanitizedInput);
 
 // get all all contacts
 $allContacts = getAllContacts($conn);
@@ -21,68 +20,55 @@ $allContacts = getAllContacts($conn);
     <div class="dashboard-main">
         <div class="filters">
             <p><span><img src="../assets/images/filter.svg" alt="filter-icon"></span>Filter by:</p>
-            <p id="all">All</p>
-            <p id="sales-lead">Sales Lead</p>
-            <p id="support">Support</p>
-            <p id="assigned-to-me">Assigned to me</p>
+            <p class="active-filter" id="all">All</p>
+            <p class="active-filter" id="sales-lead">Sales Lead</p>
+            <p class="active-filter" id="support">Support</p>
+            <p class="active-filter" id="assigned-to-me">Assigned to me</p>
         </div>
-        <?php if ($filterType == 'sales-lead'):
-            var_dump($filterType);
+        <div class="table">
+
+        <?php
+        if ($filterType == 'sales-lead' || $filterType == 'support' || $filterType == 'assigned-to-me'):
         ?>
             <table>
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Company</th>
-                    <th>Type</th>
+                    <th colspan="2">Type</th>
                 </tr>
-                <tr>
-                <?php foreach ($allContacts as $contact): ?>
-                    <?php foreach ($contact as $key => $value): ?>
-                        <td><?= $value ?></td>
-                    <?php endforeach; ?>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
-        <?php if ($filterType == 'support'):
-            var_dump($filterType);
-                ?>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Company</th>
-                    <th>Type</th>
-                </tr>
-                <tr>
-                <?php foreach ($allContacts as $contact): ?>
-                    <?php foreach ($contact as $key => $value): ?>
-                        <td><?= $value ?></td>
-                    <?php endforeach; ?>
+                <?php foreach ($filteredArr as $contact): ?>
+                    <tr>
+                        <td><?= $contact['firstname'] ?></td>
+                        <td><?= $contact['email'] ?></td>
+                        <td><?= $contact['company'] ?></td>
+                        <td><?= $contact['type'] ?></td>
+                        <td><p class="view-button">View</p></td>
                     </tr>
                 <?php endforeach; ?>
             </table>
         <?php else:
-            var_dump($filterType);
-        ?>
+            // Show all contacts if no specific filter is selected
+            ?>
             <table>
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Company</th>
-                    <th>Type</th>
+                    <th colspan="2">Type</th>
                 </tr>
-                <tr>
                 <?php foreach ($allContacts as $contact): ?>
-                    <?php foreach ($contact as $key => $value): ?>
-                        <td><?= $value ?></td>
-                    <?php endforeach; ?>
+                    <tr>
+                        <td><?= $contact['firstname'] ?></td>
+                        <td><?= $contact['email'] ?></td>
+                        <td><?= $contact['company'] ?></td>
+                        <td><?= $contact['type'] ?></td>
+                        <td><p class="view-button">View</p></td>
                     </tr>
                 <?php endforeach; ?>
             </table>
         <?php endif; ?>
-        <?php endif; ?>
-
+        </div>
     </div>
 </main>
 

@@ -14,17 +14,15 @@ function dd($var) {
 
 
 // Function for validation and sanitization
-function validate_sanitize($input){
-    // Implement your validation and sanitization logic here
-    // For simplicity, let's assume basic validation for demonstration
+function sanitize($input){
     return htmlspecialchars(trim($input));
 }
 
 // Function for user login
 function login($conn, $email, $password){
-    // Example of using validate_sanitize function
-    $sanitizedEmail = validate_sanitize($email);
-    $sanitizedPassword = validate_sanitize($password);
+    // Example of using sanitize function
+    $sanitizedEmail = sanitize($email);
+    $sanitizedPassword = sanitize($password);
 
     // Your login logic here
     // Placeholder logic, you need to replace this with actual login logic
@@ -60,10 +58,10 @@ function logout(){
 
 // Function to add a new user
 function newUser($conn, $userName, $password, $role){
-    // Example of using validate_sanitize function
-    $sanitizedUserName = validate_sanitize($userName);
-    $sanitizedPassword = validate_sanitize($password);
-    $sanitizedRole = validate_sanitize($role);
+    // Example of using sanitize function
+    $sanitizedUserName = sanitize($userName);
+    $sanitizedPassword = sanitize($password);
+    $sanitizedRole = sanitize($role);
 
     // Your new user logic here
     // Placeholder logic, you need to replace this with actual user creation logic
@@ -101,28 +99,20 @@ function getAllUsers($conn){
 
 // Function to add a new contact
 function addNewContact($conn, $title, $fname, $lname, $email, $telephone, $company, $type, $assigned_to){
-    // Example of using validate_sanitize function
-    $sanitizedTitle = validate_sanitize($title);
-    $sanitizedFname = validate_sanitize($fname);
-    $sanitizedLname = validate_sanitize($lname);
-    $sanitizedEmail = validate_sanitize($email);
-    $sanitizedTelephone = validate_sanitize($telephone);
-    $sanitizedCompany = validate_sanitize($company);
-    $sanitizedType = validate_sanitize($type);
-    $sanitizedAssignedTo = validate_sanitize($assigned_to);
+    // Example of using sanitize function
 
     // Your add new contact logic here
     // Placeholder logic, you need to replace this with actual logic
-    $query = "INSERT INTO contacts ( title, fname, lname, email, telephone, company, type, assigned_to, created_at, updated_at) VALUES ( :title, :fname, :lname, :email, :telephone, :company, :type, :assigned_to, NOW(), NOW())";
+    $query = "INSERT INTO contacts ( title, firstname, lastname, email, telephone, company, type, assigned_to, created_at, updated_at) VALUES ( :title, :fname, :lname, :email, :telephone, :company, :type, :assigned_to, NOW(), NOW())";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':title', $sanitizedTitle);
-    $stmt->bindParam(':fname', $sanitizedFname);
-    $stmt->bindParam(':lname', $sanitizedLname);
-    $stmt->bindParam(':email', $sanitizedEmail);
-    $stmt->bindParam(':telephone', $sanitizedTelephone);
-    $stmt->bindParam(':company', $sanitizedCompany);
-    $stmt->bindParam(':type', $sanitizedType);
-    $stmt->bindParam(':assigned_to', $sanitizedAssignedTo);
+    $stmt->bindParam(':title', $title);
+    $stmt->bindParam(':fname', $fname);
+    $stmt->bindParam(':lname', $lname);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':telephone', $telephone);
+    $stmt->bindParam(':company', $company);
+    $stmt->bindParam(':type', $type);
+    $stmt->bindParam(':assigned_to', $assigned_to);
     $stmt->execute();
 
     // Check if contact creation is successful

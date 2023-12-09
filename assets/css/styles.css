@@ -10,6 +10,7 @@ body {
     min-height: 100vh;
     font-family: Arial, sans-serif;
     line-height: 1.6;
+    overflow: hidden;
 }
 
 /* Variables */
@@ -210,6 +211,53 @@ input:focus {
     transition: 100ms ease;
 }
 
+.active {
+    color: #ccc;
+    border-bottom: 2px solid var(--color-purple);
+}
+
 .filters p span img {
     vertical-align: middle;
 }
+
+/* Apply styles to the entire table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+/* Style the table headers */
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: left;
+}
+
+
+th {
+    background-color: #f2f2f2;
+
+}
+
+/* Alternating row colors for better readability */
+
+tr{
+    border-radius: 5px;
+}
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+
+}
+
+
+
+/* Highlight cells on hover */
+td:hover {
+    background-color: #d8e2f0;
+}
+

@@ -6,8 +6,13 @@ $user = $users[0]['firstname'];
 
 <main>
     <h2>New Contact</h2>
+    <div class="success-message">
+        <?php if ($success ?? null && $success === true) : ?>
+            <p>Contact created successfully!</p>
+        <?php endif; ?>
+    </div>
     <div class="contact-container">
-    <form action="includes/process-new-contact.php" method="post" class="grid-form">
+    <form action="../includes/process-new-contact.php" method="post" class="grid-form">
         <div class="grid-item row-1-span-2">
             <label for="Title">Title</label>
             <select id="Title" name="Title">
