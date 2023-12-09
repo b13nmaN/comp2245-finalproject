@@ -15,7 +15,7 @@ $allContacts = getAllContacts($conn);
 <main>
     <div class="dashboard-header">
         <h2>Dashboard</h2>
-        <button class="add-contact">Add Contact</button>
+        <button class="add-contact btn-primary">Add Contact</button>
     </div>
     <div class="container-main">
         <div class="filters">

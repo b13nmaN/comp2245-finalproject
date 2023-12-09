@@ -2,8 +2,8 @@
     <div class="dashboard-header">
         <h2>Contact Details</h2>
         <div>
-            <button class="add-contact">Add Contact</button>
-            <button class="add-contact">Add Contact</button>
+            <button class="btn-primary to-me">Assign to me</button>
+            <button class="btn-primary to-sales-lead">Switch to sales lead</button>
         </div>
         <!-- header goes here -->
         <!-- do not change the dashboard-header styles -->

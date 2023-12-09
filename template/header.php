@@ -6,6 +6,7 @@
     <title>Dolphin CRM</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
