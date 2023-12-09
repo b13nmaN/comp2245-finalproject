@@ -1,5 +1,6 @@
 <?php
-
+require_once('helpers.php');
+require_once('../config/config.php');
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data using $_POST superglobal
@@ -10,18 +11,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $telephone = $_POST["number"];
     $company = $_POST["company"];
     $type = $_POST["type"];
+    $assigned_to = $_POST["assign-to"];
+
+    echo $firstName;
+
+    // sanitize input
+    $titleSanitized = sanitize($title);
+    $firstNameSanitized = sanitize($firstName);
+    $lastNameSanitized = sanitize($lastName);
+    $emailSanitized = sanitize($email);
+    $telephoneSanitized = sanitize($telephone);
+    $companySanitized = sanitize($company);
+    $typeSanitized = sanitize($type);
+    $assigned_toSanitized = sanitize($assigned_to);
     
     // Call the addNewContact function
-    $success = addNewContact($conn, $title, $firstName, $lastName, $email, $telephone, $company, $type, $assigned_to);
+    $success = addNewContact(
+        $conn, 
+        $titleSanitized, 
+        $firstNameSanitized, 
+        $lastNameSanitized, 
+        $emailSanitized, 
+        $telephoneSanitized, 
+        $companySanitized, 
+        $typeSanitized, 
+        $assigned_toSanitized
+    );
 
-    if ($success) {
-        echo "Contact added successfully!";
-    } else {
-        echo "Error adding contact.";
-    }
-} else {
-    // Redirect back to the form if accessed directly without submitting
-    header("Location: index.html");
-    exit();
+//     if ($success) {
+//         echo "Contact added successfully!";
+//     } else {
+//         echo "Error adding contact.";
+//     }
+// } else {
+//     // Redirect back to the form if accessed directly without submitting
+//     header("Location: index.html");
+//     exit();
 }
 ?>

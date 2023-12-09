@@ -10,6 +10,7 @@ body {
     min-height: 100vh;
     font-family: Arial, sans-serif;
     line-height: 1.6;
+    overflow: hidden;
 }
 
 /* Variables */
@@ -30,8 +31,8 @@ body {
 .container {
     height: 100vh;
     display: grid;
-    grid-template-columns: 20% 75%;
-    grid-template-rows: 10% 90%;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: auto 95%;
 }
 
 nav {
@@ -51,11 +52,18 @@ main {
 
 /* Header styles */
 header {
-    background-color: var(--primary-color);
+    background-color: var(--color-dark-blue);
     grid-column: span 2;
     grid-row: 1;
-    padding: 1rem;
+    padding: 10px;
 }
+
+header p {
+    color: white;
+    vertical-align: middle;
+}
+
+
 /* Sidebar Styles */
 
 /* home page styles */
@@ -67,98 +75,189 @@ header {
 }
 
 
-/* New contnact page */
+/* New contact page */
 
 .contact-container {
+    background: #fff;
     margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    
 }
 form {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* create two equal columns */
-  grid-auto-rows: minmax(40px, auto); /* set the minimum and maximum height of the rows */
-  grid-gap: 10px; /* add some space between the grid items */
-  align-items: center; /* vertically align the grid items */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
 }
+
+.grid-item {
+    grid-column: span 1;
+    margin-bottom: 10px;
+}
+
+.row-1-span-2, 
+.row-6-span-2 {
+    grid-column: span 2;
+    
+}
+
+
+.grid-item:last-of-type {
+    /* your styles here */
+    background-color: var(--color-light-gray);
+    height: 50px;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+#Title {
+    width: 70px;
+}
+
 
 label {
-  grid-column: 1; /* place the labels in the first column */
-}
-
-input, select {
-  grid-column: 2; /* place the inputs and selects in the second column */
-}
-
-input[type="submit"] {
-  grid-column: 1 / 3; /* span the submit button across both columns */
-  justify-self: center; /* horizontally center the button */
-}
-
-label {
+    display: block;
     margin-top: 10px;
 }
+
 
 input, select {
     margin-bottom: 10px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    width: 100%;
 }
 
-input[type="submit"] {
-    background-color: #4CAF50;
+input:focus {
+    outline: 2px solid rgb(74, 74, 255); /* Change 'red' to any color you want */
+}
+
+
+.save-button {
+    padding: 8px 12px;
+    background-color: var(--color-purple);
     color: white;
     cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    float: right;
 }
 
-input[type="submit"]:hover {
-    background-color: #45a049;
+.save-button:hover {
+    background-color: #4f46e5e5;
 }
 
-/*new-user page*/
-.user-container {
+/* Dashboard styles */
+
+.dashboard-main {
+    background: #fff;
     margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    
+    min-height: 600px;
+}
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  th, td {
-    text-align: left;
-    padding: 8px;
-  }
-  
-  th {
-    background-color: #ccc;
+.add-contact {
+    padding: 8px 12px;
+    background-color: var(--color-purple);
     color: white;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  .new-user-button {
-    background-color: purple;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
     cursor: pointer;
-  }
-  
-  
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.add-contact:hover {
+    background-color: #4e46e5e5;
+}
+
+.add-contact::before {
+    content: "\002B";
+    font-size: 20px;
+    margin-right: 5px;
+    width: auto;
+    vertical-align: middle;
+    line-height: 0;
+}
+
+
+.filters {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+.filters :first-child {
+    font-weight: 600;
+}
+
+.filters :not(:first-child) {
+    color: #ccc;
+    margin-left: 20px;
+}
+
+/* fix hover effect */
+.filters :not(:first-child):hover {
+    color: #ccc;
+    cursor: pointer;
+    border-bottom: 2px solid var(--color-purple);
+    transition: 100ms ease;
+}
+
+.active {
+    color: #ccc;
+    border-bottom: 2px solid var(--color-purple);
+}
+
+.filters p span img {
+    vertical-align: middle;
+}
+
+/* Apply styles to the entire table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+/* Style the table headers */
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: left;
+}
+
+
+th {
+    background-color: #f2f2f2;
+
+}
+
+/* Alternating row colors for better readability */
+
+tr{
+    border-radius: 5px;
+}
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+
+}
+
+
+
+/* Highlight cells on hover */
+td:hover {
+    background-color: #d8e2f0;
+}
+
