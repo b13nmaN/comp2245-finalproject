@@ -57,20 +57,16 @@ function logout(){
 }
 
 // Function to add a new user
-function newUser($conn, $userName, $password, $role){
-    // Example of using sanitize function
-    $sanitizedUserName = sanitize($userName);
-    $sanitizedPassword = sanitize($password);
-    $sanitizedRole = sanitize($role);
+function newUser($conn, $firstName, $lastname, $email, $password, $role){
 
     // Your new user logic here
-    // Placeholder logic, you need to replace this with actual user creation logic
-    $hashedPassword = password_hash($sanitizedPassword, PASSWORD_DEFAULT);
-    $query = "INSERT INTO users (username, password, role) VALUES (:username, :password, :role)";
+    $query = "INSERT INTO users (firstname,lastname,email,password, role) VALUES (:firstname, :lastname, :email, :password, :role)";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':username', $sanitizedUserName);
-    $stmt->bindParam(':password', $hashedPassword);
-    $stmt->bindParam(':role', $sanitizedRole);
+    $stmt->bindParam(':username', $firstName);
+    $stmt->bindParam(':password', $lastname);
+    $stmt->bindParam(':role', $email);
+    $stmt->bindParam(':role', $password);
+    $stmt->bindParam(':role', $role);
     $stmt->execute();
 
     // Check if user creation is successful
