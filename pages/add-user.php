@@ -1,4 +1,9 @@
 <main>
+    <div id="success-message">
+        <i class="material-icons" >check_circle</i>
+        <p>User successfully added!</p>
+        <i id="close-message" class="material-icons" >close</i>
+    </div>
     <h2>Add New User</h2>
     <div class="container-main">
         <form action="../includes/process-new-user.php" method="post" class="grid-form">

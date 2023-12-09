@@ -5,6 +5,11 @@ $user = $users[0]['firstname'];
 ?>
 
 <main>
+    <div id="success-message">
+        <i class="material-icons" >check_circle</i>
+        <p>User successfully added!</p>
+        <i id="close-message" class="material-icons" >close</i>
+    </div>
     <h2>New Contact</h2>
     <div class="success-message">
         <?php if ($success ?? null && $success === true) : ?>

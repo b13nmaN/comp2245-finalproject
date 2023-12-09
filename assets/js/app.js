@@ -75,6 +75,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    const closeButton = document.querySelector('#close-message');
+    if (closeButton) {
+        closeButton.addEventListener('click', () => {
+            document.getElementById('success-message').style.display = 'none';
+        });
+    }
     
 });
 
@@ -121,7 +127,7 @@ async function handleFilterRequest(filterType) {
 }
 
 function displayMessage() {
-    alert("User added successfully!");
+    document.getElementById('success-message').style.display = 'flex';
 }
 
 

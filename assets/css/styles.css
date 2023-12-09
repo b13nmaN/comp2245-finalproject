@@ -361,10 +361,46 @@ tr:nth-child(even) {
 
 /*---------------------------------------------users page styles--------------------------------------------------- */
 
-.add-user{
+/* .add-user{
     
-}
+} */
 
 
 /*---------------------------------------------add new user page styles--------------------------------------------------- */
+#success-message {
+    display: none;
+    align-items: center;
+    background-color: #ffffffd2; 
+    color: #12a617; 
+    padding: 8px; 
+    margin: 0 auto 20px;
+    border-radius: 5px; 
+    max-width: 50%;
+    border: 2px solid #12a617;
+    transition: all 0.5s ease-in;
+
+}
+
+#success-message p {
+    margin-right: 10px;
+}
+
+#success-message i {
+    color: #36aa3a; 
+    font-size: 24px;
+}
+#success-message i:first-child {
+    margin-right: 10px; 
+}
+
+#success-message i:last-child {
+    font-size: 16px;
+    margin: 0; 
+    text-align: right; 
+    flex-grow: 1; 
+}
+
+#success-message i:last-child:hover {
+    cursor: pointer;
+}
 
