@@ -5,11 +5,11 @@
     box-sizing: border-box;
 }
 
-/* General styles */
+/* ---------------------------------------------------General styles------------------------------------------------- */
 body {
     min-height: 100vh;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+    font-family: 'Inter'; font-size: 16px;
+    font-weight: 400;
     overflow: hidden;
 }
 
@@ -22,9 +22,9 @@ body {
     /* light gray */
     --color-light-gray: #f3f4f6;
     /* yellow */
-    --color-yellow: #fcd34d;
+    --color-yellow: #ffce2e;
     /* green */
-    --color-green: #48bb78;
+    --color-green: #07b850;
   }
 
 /* 2 Column Layout */
@@ -48,9 +48,30 @@ main {
     grid-row: 2;
 }
 
+.container-main {
+    background: #fff;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-height: 600px;
+}
 
+.btn-primary {
+    padding: 8px 12px;
+    background-color: var(--color-purple);
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-weight: 400;
+}
 
-/* Header styles */
+/* .btn-primary:hover {
+    background-color: #4e46e5e5;
+} */
+
+/* ----------------------------------------------Header styles------------------------------------------------- */
 header {
     background-color: var(--color-dark-blue);
     grid-column: span 2;
@@ -64,7 +85,7 @@ header p {
 }
 
 
-/* Sidebar Styles */
+/*------------------------------------------------------------Sidebar Styles-------------------------------------------- */
 
 aside nav {
     background-color: #fff;
@@ -120,7 +141,7 @@ aside nav ul li a:hover {
     color: var(--color-purple);
 }
 
-/* home page styles */
+/* -----------------------------------new contact page styles--------------------------------------------- */
 .dashboard {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -129,15 +150,7 @@ aside nav ul li a:hover {
 }
 
 
-/* New contact page */
 
-.contact-container {
-    background: #fff;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
 form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -202,16 +215,8 @@ input:focus {
     background-color: #4f46e5e5;
 }
 
-/* Dashboard styles */
+/*---------------------------------------------------------Dashboard styles-------------------------------------------- */
 
-.dashboard-main {
-    background: #fff;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    min-height: 600px;
-}
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -274,7 +279,17 @@ input:focus {
     vertical-align: middle;
 }
 
-/* Apply styles to the entire table */
+.view-button {
+    color: var(--color-purple);
+    font-weight: 600;
+}
+
+.view-button:hover{
+    color:#4f46e5e5;
+    cursor: pointer;
+}
+
+/* ----------------------------------------------------General table styles-------------------------------------------- */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -309,9 +324,38 @@ tr:nth-child(even) {
 }
 
 
+/*------------------------------------------------------contact details page---------------------------------------------- */
 
-/* Highlight cells on hover */
-td:hover {
-    background-color: #d8e2f0;
+.to-me{
+    background-color: var(--color-green);
+    color: #000;
 }
 
+.to-sales-lead{
+    background-color: var(--color-yellow);
+    color: #000;
+}
+
+.to-me{
+    background-color: #48bb78c4;
+}
+
+.to-sales-lead:hover{
+    background-color: #fcd34dca;
+}
+
+.to-me::before{
+    font-family: 'Material Icons';
+    content: "\e769";
+    font-size: 24px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.to-sales-lead::before{
+    font-family: 'Material Icons';
+    content: "\e8d4";
+    font-size: 24px;
+    vertical-align: middle;
+    margin-right: 10px;
+}

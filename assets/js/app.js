@@ -43,6 +43,10 @@ document.addEventListener('DOMContentLoaded', function () {
         loadPage('/comp2245-finalproject/index.php/new-contact');
     })
     
+    
+    document.querySelector('.view-button').addEventListener('click', () => {
+        loadPage('/comp2245-finalproject/index.php/contact-details');
+    })
 });
 
 function loadPage(page) {
