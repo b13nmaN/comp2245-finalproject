@@ -1,6 +1,7 @@
 <main>
+    <h2>Add New User</h2>
     <div class="container-main">
-        <form action="../includes/process-new-contact.php" method="post" class="grid-form">
+        <form action="../includes/process-new-user.php" method="post" class="grid-form">
 
             <div class="grid-item">
                 <label for="FirstName">First Name</label>
@@ -23,8 +24,8 @@
             </div>
 
             <div class="grid-item">
-                <label for="type">Type</label>
-                <select id="type" name="type">
+                <label for="role">Type</label>
+                <select id="role" name="role">
                     <option value="Admin">Admin</option>
                     <option value="Member">Member</option>
                 </select>

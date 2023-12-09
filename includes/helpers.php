@@ -60,12 +60,12 @@ function logout(){
 function newUser($conn, $firstName, $lastname, $email, $password, $role){
 
     // Your new user logic here
-    $query = "INSERT INTO users (firstname,lastname,email,password, role) VALUES (:firstname, :lastname, :email, :password, :role)";
+    $query = "INSERT INTO users (firstname,lastname,email,password, role , created_at) VALUES (:firstname, :lastname, :email, :password, :role, NOW())";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':username', $firstName);
-    $stmt->bindParam(':password', $lastname);
-    $stmt->bindParam(':role', $email);
-    $stmt->bindParam(':role', $password);
+    $stmt->bindParam(':firstname', $firstName);
+    $stmt->bindParam(':lastname', $lastname);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $password);
     $stmt->bindParam(':role', $role);
     $stmt->execute();
 

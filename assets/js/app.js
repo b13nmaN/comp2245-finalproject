@@ -27,30 +27,55 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initial load (you can specify the default page to load)
     // loadPage('/comp2245-finalproject/index.php/home');
 
-    document.querySelector('#sales-lead').addEventListener('click', async () => {
-        document.querySelector('#sales-lead').classList.add('active');
-
-        await handleFilterRequest('sales-lead');
-    });
-
-    document.querySelector('#support').addEventListener('click', async () => {
-        document.querySelector('#support').classList.add('active');
-        await handleFilterRequest('support');
-        
-    });
+    const salesLeadButton = document.querySelector('#sales-lead');
+    if (salesLeadButton) {
+        salesLeadButton.addEventListener('click', async () => {
+            salesLeadButton.classList.add('active');
+            await handleFilterRequest('sales-lead');
+        });
+    }
     
-    document.querySelector('.add-contact').addEventListener('click', () => {
-        loadPage('/comp2245-finalproject/index.php/new-contact');
-    })
+    const supportButton = document.querySelector('#support');
+    if (supportButton) {
+        supportButton.addEventListener('click', async () => {
+            supportButton.classList.add('active');
+            await handleFilterRequest('support');
+        });
+    }
+    
+    const addContactButton = document.querySelector('.add-contact');
+    if (addContactButton) {
+        addContactButton.addEventListener('click', () => {
+            loadPage('/comp2245-finalproject/index.php/new-contact');
+        });
+    }
+    
+    const addUserButton = document.querySelector('.add-user');
+    if (addUserButton) {
+        addUserButton.addEventListener('click', () => {
+            loadPage('/comp2245-finalproject/index.php/add-user');
+        });
+    }
+    
+    const viewButton = document.querySelector('.view-button');
+    if (viewButton) {
+        viewButton.addEventListener('click', () => {
+            loadPage('/comp2245-finalproject/index.php/contact-details');
+        });
+    }
+    // Get the form element by its className
+    let form = document.querySelector("form");
 
-    document.querySelector('.add-user').addEventListener('click', () => {
-        loadPage('/comp2245-finalproject/index.php/add-user');
-    })
+    if(form) {
+        form.addEventListener("submit", function(event) {
+            // Prevent the default behavior of the form submission
+            event.preventDefault();
+            console.log("Form submitted");
+            displayMessage();
+        });
+    }
+
     
-    
-    document.querySelector('.view-button').addEventListener('click', () => {
-        loadPage('/comp2245-finalproject/index.php/contact-details');
-    })
 });
 
 function loadPage(page) {
@@ -93,6 +118,10 @@ async function handleFilterRequest(filterType) {
             document.querySelector('.table').innerHTML = mainToString;
             console.log(doc);
         })
+}
+
+function displayMessage() {
+    alert("User added successfully!");
 }
 
 

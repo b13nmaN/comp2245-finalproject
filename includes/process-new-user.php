@@ -28,14 +28,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $roleSanitized, 
     );
 
-//     if ($success) {
-//         echo "Contact added successfully!";
-//     } else {
-//         echo "Error adding contact.";
-//     }
-// } else {
-//     // Redirect back to the form if accessed directly without submitting
-//     header("Location: index.html");
-//     exit();
 }
-?>
