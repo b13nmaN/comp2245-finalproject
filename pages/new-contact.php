@@ -11,7 +11,7 @@ $user = $users[0]['firstname'];
             <p>Contact created successfully!</p>
         <?php endif; ?>
     </div>
-    <div class="contact-container">
+    <div class="container-main">
     <form action="../includes/process-new-contact.php" method="post" class="grid-form">
         <div class="grid-item row-1-span-2">
             <label for="Title">Title</label>

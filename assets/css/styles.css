@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 
-/* General styles */
+/* ---------------------------------------------------General styles------------------------------------------------- */
 body {
     min-height: 100vh;
     font-family: Arial, sans-serif;
@@ -50,7 +50,7 @@ main {
 
 
 
-/* Header styles */
+/* ----------------------------------------------Header styles------------------------------------------------- */
 header {
     background-color: var(--color-dark-blue);
     grid-column: span 2;
@@ -63,8 +63,17 @@ header p {
     vertical-align: middle;
 }
 
+.container-main {
+    background: #fff;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-height: 600px;
+}
 
-/* Sidebar Styles */
+
+/*------------------------------------------------------------Sidebar Styles-------------------------------------------- */
 
 aside nav {
     background-color: #fff;
@@ -120,7 +129,7 @@ aside nav ul li a:hover {
     color: var(--color-purple);
 }
 
-/* home page styles */
+/* -----------------------------------new contact page styles--------------------------------------------- */
 .dashboard {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -129,15 +138,7 @@ aside nav ul li a:hover {
 }
 
 
-/* New contact page */
 
-.contact-container {
-    background: #fff;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
 form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -202,16 +203,8 @@ input:focus {
     background-color: #4f46e5e5;
 }
 
-/* Dashboard styles */
+/*---------------------------------------------------------Dashboard styles-------------------------------------------- */
 
-.dashboard-main {
-    background: #fff;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    min-height: 600px;
-}
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -274,7 +267,17 @@ input:focus {
     vertical-align: middle;
 }
 
-/* Apply styles to the entire table */
+.view-button {
+    color: var(--color-purple);
+    font-weight: 500;
+}
+
+.view-button:hover{
+    color:#4f46e5e5;
+    cursor: pointer;
+}
+
+/* ----------------------------------------------------General table styles-------------------------------------------- */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -314,4 +317,8 @@ tr:nth-child(even) {
 td:hover {
     background-color: #d8e2f0;
 }
+
+
+/*------------------------------------------------------contact details page---------------------------------------------- */
+
 

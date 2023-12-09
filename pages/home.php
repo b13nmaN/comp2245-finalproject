@@ -17,7 +17,7 @@ $allContacts = getAllContacts($conn);
         <h2>Dashboard</h2>
         <button class="add-contact">Add Contact</button>
     </div>
-    <div class="dashboard-main">
+    <div class="container-main">
         <div class="filters">
             <p><span><i id="filter-icon" class="icon" data-feather="filter"></i></span>Filter by:</p>
             <p class="active-filter" id="all">All</p>
