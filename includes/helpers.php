@@ -57,20 +57,16 @@ function logout(){
 }
 
 // Function to add a new user
-function newUser($conn, $userName, $password, $role){
-    // Example of using sanitize function
-    $sanitizedUserName = sanitize($userName);
-    $sanitizedPassword = sanitize($password);
-    $sanitizedRole = sanitize($role);
+function newUser($conn, $firstName, $lastname, $email, $password, $role){
 
     // Your new user logic here
-    // Placeholder logic, you need to replace this with actual user creation logic
-    $hashedPassword = password_hash($sanitizedPassword, PASSWORD_DEFAULT);
-    $query = "INSERT INTO users (username, password, role) VALUES (:username, :password, :role)";
+    $query = "INSERT INTO users (firstname,lastname,email,password, role , created_at) VALUES (:firstname, :lastname, :email, :password, :role, NOW())";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':username', $sanitizedUserName);
-    $stmt->bindParam(':password', $hashedPassword);
-    $stmt->bindParam(':role', $sanitizedRole);
+    $stmt->bindParam(':firstname', $firstName);
+    $stmt->bindParam(':lastname', $lastname);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':role', $role);
     $stmt->execute();
 
     // Check if user creation is successful
@@ -79,19 +75,12 @@ function newUser($conn, $userName, $password, $role){
 
 // Function to get all users
 function getAllUsers($conn){
-
-    // Prepare the SQL query with a parameter
-    $query = "SELECT firstname, lastname, email FROM users WHERE id = ?";
+    // Your retrieve all contacts logic here
+    $query = "SELECT * FROM users";
     $stmt = $conn->prepare($query);
-
-    // Bind the parameter with a value
-    $id = 1; // You can change this value as needed
-    $stmt->bindParam(1, $id);
-
-    // Execute the query
     $stmt->execute();
 
-    // Fetch all users as an associative array
+    // Fetch all contacts as an associative array
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     return $users;
