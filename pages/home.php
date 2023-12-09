@@ -19,7 +19,7 @@ $allContacts = getAllContacts($conn);
     </div>
     <div class="dashboard-main">
         <div class="filters">
-            <p><span><img src="../assets/images/filter.svg" alt="filter-icon"></span>Filter by:</p>
+            <p><span><i id="filter-icon" class="icon" data-feather="filter"></i></span>Filter by:</p>
             <p class="active-filter" id="all">All</p>
             <p class="active-filter" id="sales-lead">Sales Lead</p>
             <p class="active-filter" id="support">Support</p>
