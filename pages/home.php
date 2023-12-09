@@ -1,49 +1,74 @@
 
 <?php
+// get filter type
 $filterType = $_GET['filterType'] ?? null;
-var_dump($filterType);
-// $sanitizedInput = vailate_sanitize($filterType);
-// $filteredArr = getFilterRequest($sanitizedInput);
+$sanitizedInput = sanitize($filterType);
+$filteredArr = getFilterRequest($conn, $sanitizedInput);
 
+// get all all contacts
+$allContacts = getAllContacts($conn);
 ?>
 
 
 
 
 <main>
-    <div class="dashboard">
-        <div class="dashboard-header">
-            <h2>Dashboard</h2>
-            <button id="add-contact">add contact</button>
+    <div class="dashboard-header">
+        <h2>Dashboard</h2>
+        <button class="add-contact">Add Contact</button>
+    </div>
+    <div class="dashboard-main">
+        <div class="filters">
+            <p><span><img src="../assets/images/filter.svg" alt="filter-icon"></span>Filter by:</p>
+            <p class="active-filter" id="all">All</p>
+            <p class="active-filter" id="sales-lead">Sales Lead</p>
+            <p class="active-filter" id="support">Support</p>
+            <p class="active-filter" id="assigned-to-me">Assigned to me</p>
         </div>
-        <div class="dashboard-main">
-            <button id="sales-lead">saleslead</button>
-            <button id="support">support</button>
-            <div class="filter">
-                
-                <?php if ($filterType == 'sales-lead'):
-                var_dump($filterType);
-                ?>
-                
-                <table>
+        <div class="table">
+
+        <?php
+        if ($filterType == 'sales-lead' || $filterType == 'support' || $filterType == 'assigned-to-me'):
+        ?>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Company</th>
+                    <th colspan="2">Type</th>
+                </tr>
+                <?php foreach ($filteredArr as $contact): ?>
                     <tr>
-                        <th>sales lead</th>
+                        <td><?= $contact['firstname'] ?></td>
+                        <td><?= $contact['email'] ?></td>
+                        <td><?= $contact['company'] ?></td>
+                        <td><?= $contact['type'] ?></td>
+                        <td><p class="view-button">View</p></td>
                     </tr>
-                </table>
-            <?php else: ?>
-                <?php if ($filterType == 'support'):
-                    var_dump($filterType);
-                     ?>
-                <table>
+                <?php endforeach; ?>
+            </table>
+        <?php else:
+            // Show all contacts if no specific filter is selected
+            ?>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Company</th>
+                    <th colspan="2">Type</th>
+                </tr>
+                <?php foreach ($allContacts as $contact): ?>
                     <tr>
-                        <th>support</th>
+                        <td><?= $contact['firstname'] ?></td>
+                        <td><?= $contact['email'] ?></td>
+                        <td><?= $contact['company'] ?></td>
+                        <td><?= $contact['type'] ?></td>
+                        <td><p class="view-button">View</p></td>
                     </tr>
-                </table>
-                <?php endif; ?>
-                <?php endif; ?>
-            </div>
+                <?php endforeach; ?>
+            </table>
+        <?php endif; ?>
         </div>
     </div>
-    <div class="type"></div>
 </main>
 

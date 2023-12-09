@@ -17,22 +17,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Listen to popstate event to handle browser navigation
     window.addEventListener('popstate', function (event) {
+        // navigate to the new contact page when the "Add Contact" button is clicked
+    
         if (event.state && event.state.page) {
             loadPage(event.state.page); // Load the page when navigating through history
         }
     });
 
     // Initial load (you can specify the default page to load)
-    // loadPage('pages/home.php');
+    // loadPage('/comp2245-finalproject/index.php/home');
 
-    // get Requested filter
-    document.querySelector('#sales-lead').addEventListener('click', async ()=>{
-        await handleFilterRequest('sales-lead')
-    })
+    document.querySelector('#sales-lead').addEventListener('click', async () => {
+        document.querySelector('#sales-lead').classList.add('active');
 
-    document.querySelector('#support').addEventListener('click', async ()=>{
-        await handleFilterRequest('support')
+        await handleFilterRequest('sales-lead');
+    });
+
+    document.querySelector('#support').addEventListener('click', async () => {
+        document.querySelector('#support').classList.add('active');
+        await handleFilterRequest('support');
+        
+    });
+    
+    document.querySelector('.add-contact').addEventListener('click', () => {
+        loadPage('/comp2245-finalproject/index.php/new-contact');
     })
+    
 });
 
 function loadPage(page) {
@@ -58,18 +68,21 @@ function loadPage(page) {
     // handler functions
 
 async function handleFilterRequest(filterType) {
+    console.log(filterType);
 	await fetch('/comp2245-finalproject/index.php/home?filterType=' + filterType)
         .then(response => response.text())
         .then(data => {
             //parse html to get main
             const parser = new DOMParser();
             const doc = parser.parseFromString(data, 'text/html');
-            let main = doc.querySelector('table')
-            let mainToString = main.innerHTML
+            let main = doc.querySelector('main')
+            let table = main.querySelector('.table')
+            console.log(table);
+            let mainToString = table.innerHTML
             console.log(mainToString);
 
             // Update the content area with the loaded HTML
-            document.querySelector('.filter').innerHTML = mainToString;
+            document.querySelector('.table').innerHTML = mainToString;
             console.log(doc);
         })
 }
