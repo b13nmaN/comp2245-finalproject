@@ -42,6 +42,10 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.add-contact').addEventListener('click', () => {
         loadPage('/comp2245-finalproject/index.php/new-contact');
     })
+
+    document.querySelector('.add-user').addEventListener('click', () => {
+        loadPage('/comp2245-finalproject/index.php/new-contact');
+    })
     
     
     document.querySelector('.view-button').addEventListener('click', () => {

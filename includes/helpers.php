@@ -79,19 +79,12 @@ function newUser($conn, $userName, $password, $role){
 
 // Function to get all users
 function getAllUsers($conn){
-
-    // Prepare the SQL query with a parameter
-    $query = "SELECT firstname, lastname, email FROM users WHERE id = ?";
+    // Your retrieve all contacts logic here
+    $query = "SELECT * FROM users";
     $stmt = $conn->prepare($query);
-
-    // Bind the parameter with a value
-    $id = 1; // You can change this value as needed
-    $stmt->bindParam(1, $id);
-
-    // Execute the query
     $stmt->execute();
 
-    // Fetch all users as an associative array
+    // Fetch all contacts as an associative array
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     return $users;
