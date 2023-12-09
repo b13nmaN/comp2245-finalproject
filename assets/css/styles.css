@@ -31,7 +31,7 @@ body {
 .container {
     height: 100vh;
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 15% 85%;
     grid-template-rows: auto 95%;
 }
 
@@ -55,7 +55,7 @@ header {
     background-color: var(--color-dark-blue);
     grid-column: span 2;
     grid-row: 1;
-    padding: 10px;
+    padding: 15px;
 }
 
 header p {
@@ -65,6 +65,55 @@ header p {
 
 
 /* Sidebar Styles */
+
+aside nav {
+    background-color: #fff;
+    color: #000;
+    padding: 20px;
+}
+
+aside{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    border-right: 1px solid #ccc;
+}
+
+aside nav ul {
+    list-style-type: none;
+    outline-color: transparent;
+    text-decoration: none;
+}
+
+nav ul li:nth-child(3) {
+    border-bottom: 1px solid #ccc;
+}
+
+
+aside nav ul li{
+    display: flex;
+    align-items: center;
+    padding: 10px 5px;
+}
+
+aside nav ul li a {
+    margin-left: 10px;
+    outline-color: transparent;
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    stroke-width: 1.5;
+}
+
+
+
+
+aside nav ul li a:hover {
+    color: var(--color-purple);
+}
 
 /* home page styles */
 .dashboard {
