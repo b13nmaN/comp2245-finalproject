@@ -1,5 +1,5 @@
 <main>
-    <div id="success-message">
+    <div id="success-message" class="show">
         <i class="material-icons" >check_circle</i>
         <p>User successfully added!</p>
         <i id="close-message" class="material-icons" >close</i>

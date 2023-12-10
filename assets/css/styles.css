@@ -378,7 +378,10 @@ tr:nth-child(even) {
     max-width: 50%;
     border: 2px solid #12a617;
     transition: all 0.5s ease-in;
+}
 
+#success-message.show {
+    display: flex;
 }
 
 #success-message p {
@@ -389,6 +392,7 @@ tr:nth-child(even) {
     color: #36aa3a; 
     font-size: 24px;
 }
+
 #success-message i:first-child {
     margin-right: 10px; 
 }
@@ -403,4 +407,5 @@ tr:nth-child(even) {
 #success-message i:last-child:hover {
     cursor: pointer;
 }
+
 
