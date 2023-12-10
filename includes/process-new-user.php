@@ -19,13 +19,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $roleSanitized = sanitize($role);
     
     // Call the addNewContact function
-    // newUser(
-    //     $conn, 
-    //     $firstNameSanitized, 
-    //     $lastNameSanitized, 
-    //     $emailSanitized, 
-    //     $passwordSanitizedAndHashed, 
-    //     $roleSanitized, 
-    // );
+    newUser(
+        $conn, 
+        $firstNameSanitized, 
+        $lastNameSanitized, 
+        $emailSanitized, 
+        $passwordSanitizedAndHashed, 
+        $roleSanitized, 
+    );
 
 }
