@@ -1,31 +1,35 @@
 // No refresh js
 // assets/js/app.js
 document.addEventListener('DOMContentLoaded', function () {
-
+    
     console.log('DOM fully loaded and parsed');
+    let successMessage = document.getElementById('success-message');
+    if (successMessage) {
+        successMessage.getElementById('success-message').classList.remove('show');
+    }
     // Attach click event listeners to all navigation links
-    const navLinks = document.querySelectorAll('.nav-link'); // Assuming your navigation links have a class 'nav-link'
+    const navLinks = [...document.getElementsByTagName('a')]
+    console.log(navLinks);
     navLinks.forEach(link => {
         link.addEventListener('click', function (event) {
             event.preventDefault();
-            const page = this.getAttribute('href'); // Get the href attribute value to know which page to load
+            // Check if the clicked element has the class "nav-link"
+            const page = this.getAttribute('href');
             console.log(`${page} clicked`);
             loadPage(page);
-            window.history.pushState({page: page}, null, page); // Push a new state to the history stack
+            window.history.pushState({ page: page }, null, page);
+            console.log(window.history.s);
         });
     });
 
     // Listen to popstate event to handle browser navigation
     window.addEventListener('popstate', function (event) {
-        // navigate to the new contact page when the "Add Contact" button is clicked
-    
         if (event.state && event.state.page) {
+            console.log(`Navigating to ${event.state.page}`);
             loadPage(event.state.page); // Load the page when navigating through history
         }
     });
 
-    // Initial load (you can specify the default page to load)
-    // loadPage('/comp2245-finalproject/index.php/home');
 
     const salesLeadButton = document.querySelector('#sales-lead');
     if (salesLeadButton) {
@@ -53,7 +57,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const addUserButton = document.querySelector('.add-user');
     if (addUserButton) {
         addUserButton.addEventListener('click', () => {
-            loadPage('/comp2245-finalproject/index.php/add-user');
+            let page = '/comp2245-finalproject/index.php/add-user';
+            loadPage(page);
+            window.history.pushState({page: page}, null, page);
         });
     }
     
@@ -68,9 +74,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if(form) {
         form.addEventListener("submit", function(event) {
-            // Prevent the default behavior of the form submission
-            event.preventDefault();
             console.log("Form submitted");
+            event.preventDefault();
+            loadPage('/comp2245-finalproject/index.php/add-user');
             displayMessage();
         });
     }
@@ -78,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeButton = document.querySelector('#close-message');
     if (closeButton) {
         closeButton.addEventListener('click', () => {
-            document.getElementById('success-message').style.display = 'none';
+            document.getElementById('success-message').classList.remove('show');
         });
     }
     
@@ -96,15 +102,11 @@ function loadPage(page) {
             let main = doc.querySelector('main')
             let mainToString = main.innerHTML
             console.log(main);
-
             // Update the content area with the loaded HTML
             document.querySelector('main').innerHTML = mainToString; // Use querySelector instead of getElementsByClassName
         })
         .catch(error => console.error('Error:', error));
-
     }
-
-    // handler functions
 
 async function handleFilterRequest(filterType) {
     console.log(filterType);
@@ -127,8 +129,9 @@ async function handleFilterRequest(filterType) {
 }
 
 function displayMessage() {
-    document.getElementById('success-message').style.display = 'flex';
+    document.getElementById('success-message').classList.add('show');
 }
+
 
 
 

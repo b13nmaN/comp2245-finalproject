@@ -7,7 +7,7 @@ $users = getAllUsers($conn);
 <main>
     <div class="dashboard-header">
         <h2>Users</h2>
-        <button class="btn-primary add-user">Add user</button>
+        <button class="btn-primary add-user">Add user</a></button>
     </div>
     <div class="container-main">
         <div class="table">
