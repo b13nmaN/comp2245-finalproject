@@ -8,19 +8,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // sanitize input
 
+    // sanitize input
+ 
     $emailSanitized = sanitize($email);
     $passwordSanitized = sanitize($password);
+    $passwordSanitizedAndHashed = password_hash($passwordSanitized,  PASSWORD_BCRYPT);
     
     // Call the addNewContact function
-    // newUser(
-    //     $conn, 
-    //     $firstNameSanitized, 
-    //     $lastNameSanitized, 
-    //     $emailSanitized, 
-    //     $passwordSanitizedAndHashed, 
-    //     $roleSanitized, 
-    // );
+    $success = login(
+        $conn, 
+        $emailSanitized, 
+        $passwordSanitizedAndHashed,
+    );
+
+    if($success){
+        header("Location: /comp2245-finalproject/index.php/home");
+        exit();
+    }
+    else{
+        echo "Enter correct email and password";
+    }
 
 }

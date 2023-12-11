@@ -20,16 +20,10 @@ function sanitize($input){
 
 // Function for user login
 function login($conn, $email, $password){
-    // Example of using sanitize function
-    $sanitizedEmail = sanitize($email);
-    $sanitizedPassword = sanitize($password);
-
-    // Your login logic here
-    // Placeholder logic, you need to replace this with actual login logic
     $query = "SELECT * FROM users WHERE email = :email AND password = :password";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':email', $sanitizedEmail);
-    $stmt->bindParam(':password', $sanitizedPassword);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':password', $password);
     $stmt->execute();
 
     // Check if login is successful
