@@ -10,7 +10,7 @@ body {
     min-height: 100vh;
     font-family: 'Inter'; font-size: 16px;
     font-weight: 400;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 /* Variables */
@@ -324,7 +324,7 @@ tr:nth-child(even) {
 
 
 /*------------------------------------------------------contact details page---------------------------------------------- */
-
+  
 .to-me{
     background-color: var(--color-green);
     color: #000;
@@ -358,6 +358,8 @@ tr:nth-child(even) {
     vertical-align: middle;
     margin-right: 10px;
 }
+
+
 
 /*---------------------------------------------users page styles--------------------------------------------------- */
 
