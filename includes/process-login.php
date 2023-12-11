@@ -10,19 +10,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     // sanitize input
- 
+
     $emailSanitized = sanitize($email);
     $passwordSanitized = sanitize($password);
-    $passwordSanitizedAndHashed = password_hash($passwordSanitized,  PASSWORD_BCRYPT);
     
     // Call the addNewContact function
     $success = login(
         $conn, 
         $emailSanitized, 
-        $passwordSanitizedAndHashed,
+        $passwordSanitized,
     );
+    // var_dump($success);
+    // var_dump($userData);
 
-    if($success){
+        
+
+    if($success ?? null){
+        session_start();
+        $_SESSION['user'] = $success;
         header("Location: /comp2245-finalproject/index.php/home");
         exit();
     }

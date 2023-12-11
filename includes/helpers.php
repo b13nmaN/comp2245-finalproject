@@ -19,24 +19,25 @@ function sanitize($input){
 }
 
 // Function for user login
-function login($conn, $email, $password){
-    $query = "SELECT * FROM users WHERE email = :email AND password = :password";
+function login($conn, $email, $password) {
+    $query = "SELECT * FROM users WHERE email = :email";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':password', $password);
     $stmt->execute();
 
-    // Check if login is successful
+    // Check if user exists
     if ($stmt->rowCount() > 0) {
-        // Log in successful
-        // Use sessions to store user information
-        $_SESSION['user'] = $stmt->fetch(PDO::FETCH_ASSOC);
-        return true;
-    } else {
-        // Login failed
-        return false;
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (password_verify($password, $user['password'])) {
+            // var_dump($user);
+            
+            return $user;
+        }
     }
+    // Login failed
+    return false;
 }
+
 
 // Function for user logout
 function logout(){
@@ -46,7 +47,7 @@ function logout(){
     session_start();
     session_unset();
     session_destroy();
-    header("Location: login.php"); // Redirect to login page
+    header("Location: /comp2245-finalproject/login.php"); // Redirect to login page
     exit();
 }
 

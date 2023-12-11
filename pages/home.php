@@ -7,7 +7,8 @@ $filteredArr = getFilterRequest($conn, $sanitizedInput);
 // get all all contacts
 $allContacts = getAllContacts($conn);
 
-$userData = $_SESSION['user'];
+
+
 var_dump($userData);
 ?>
 

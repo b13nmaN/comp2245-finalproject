@@ -1,6 +1,7 @@
 <?php
 require 'config/config.php';
 require 'includes/helpers.php';
+require 'includes/session-management.php';
 ?>
 
 <?php include 'template/header.php'; ?>
