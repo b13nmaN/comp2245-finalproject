@@ -63,10 +63,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     
-    const viewButton = document.querySelector('.view-button');
-    if (viewButton) {
-        viewButton.addEventListener('click', () => {
-            loadPage('/comp2245-finalproject/index.php/contact-details');
+    const viewButtons = document.querySelectorAll('.view-button');
+    if (viewButtons) {
+        // Add click event listener to each "View" button
+        viewButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                // Get the contact ID from the data-contact-id attribute
+                let contactId = button.getAttribute("data-contact-id");
+                SendContactName(contactId, '/comp2245-finalproject/index.php/contact-details')
+            });
         });
     }
     // Get the form element by its className
@@ -87,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('success-message').classList.remove('show');
         });
     }
+
     
 });
 
@@ -128,12 +134,25 @@ async function handleFilterRequest(filterType) {
         })
 }
 
+async function SendContactName(contactId, url) {
+	await fetch('/comp2245-finalproject/index.php/contact-details?contactId=' + contactId)
+        .then(response => response.text())
+        
+        .then(data => {
+            console.log('this is the data', data)
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, 'text/html');
+            console.log(doc);
+
+            let main = doc.querySelector('main')
+            let mainToString = main.innerHTML
+            console.log(main);
+            // Update the content area with the loaded HTML
+            document.querySelector('main').innerHTML = mainToString;
+            
+        })
+}
+
 function displayMessage() {
     document.getElementById('success-message').classList.add('show');
 }
-
-
-
-
-
-

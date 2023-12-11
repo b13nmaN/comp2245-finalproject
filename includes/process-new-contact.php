@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $type = $_POST["type"];
     $assigned_to = $_POST["assign-to"];
 
-    echo $firstName;
+    echo $assigned_to;
 
     // sanitize input
     $titleSanitized = sanitize($title);
@@ -35,7 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $telephoneSanitized, 
         $companySanitized, 
         $typeSanitized, 
-        $assigned_toSanitized
+        $assigned_toSanitized,
+        "$firstNameSanitized $lastNameSanitized"
     );
 
 //     if ($success) {
