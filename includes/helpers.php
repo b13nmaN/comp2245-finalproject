@@ -188,22 +188,19 @@ function switchMeToSalesLead($conn, $id){
 
 // Function to add a note to a contact
 function addNote($conn, $contact_id, $comment, $created_by){
-    // Implement logic to add a note to the notes table
-    // Use join to filter based on id in the contacts table
-    // Placeholder logic, you need to replace this with actual logic
-    $query = "INSERT INTO notes (contact_id, comment, created_by) VALUES (:contact_id, :comment,:created_by, NOW())";
+    $query = "INSERT INTO notes (contact_id, comment, created_by, created_at) VALUES (:contact_id, :comment,:created_by, NOW())";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':contact_id', $contact_id);
+    $stmt->bindParam(':contact_id', $contact_id, PDO::PARAM_INT);
     $stmt->bindParam(':comment', $comment);
-    $stmt->bindParam(':created_by', $created_by);
+    $stmt->bindParam(':created_by', $created_by, PDO::PARAM_STR);
     $stmt->execute();
 }
 
 // Function to load notes for a contact
 function loadNotes($conn, $contact_id){
-    $query = "SELECT comment FROM notes WHERE contact_id = :contact_id";
+    $query = "SELECT comment, created_at, created_by FROM notes WHERE contact_id = :contact_id";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':contact_id', $contact_id);
+    $stmt->bindParam(':contact_id', $contact_id, PDO::PARAM_INT);
     $stmt->execute();
 
     // Fetch notes

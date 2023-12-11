@@ -1,7 +1,8 @@
 <?php
 $contactName = $_GET['contactId'] ?? null;
 $currentContact = getCurrentContact($conn, $contactName);
-
+$contact_id = $currentContact['id'];
+$notes = loadNotes($conn, $contact_id);
 ?>
 
 <main>
@@ -17,17 +18,30 @@ $currentContact = getCurrentContact($conn, $contactName);
         
     </div>
     <div class="container-main">
-        <p><?php echo $currentContact['id']?></p>
         <!-- content goes here -->
     </div>
     <div class="container-main">
-        <form action="../includes/process-new-note.php" method="post">
-            <div class="row-6-span-2">
-                <label for="add-note"><?php echo "Add a note about " . $getCurrentContact['firstname']; ?></label>
-                <textarea name="add-note" id="add-note" cols="30" rows="10"></textarea>
+        <div class="notes-container">
+            <?php foreach ($notes as $note): 
+                $dateTime = new DateTime($note['created_at']);
+                $formattedDate = $dateTime->format("F j, Y \a\\t g:ia");
+                ?>
+                <div class="note">
+                    <p><?= $note['created_by']; ?></p>
+                    <p><?= $note['comment']; ?></p>
+                    <p><?= $formattedDate; ?></p>
+                </div>
+            <?php endforeach ?>  
+        </div>
+        <form action="../includes/process-new-note.php" method="post" id="note-form">
+            <input type="hidden" name="contact_id" value="<?php echo $currentContact['id']; ?>">
+            <input type="hidden" name="created_by" value="<?php echo $currentContact['firstname']; ?>">
+            <div class="grid-item row-6-span-2">
+                <label for="comment"><?php echo "Add a note about " . $currentContact['firstname']; ?></label>
+                <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
             </div>
                 <div class="grid-item row-6-span-2">
-                <button type="submit" class="save-button">Save</button>
+                <button type="submit" class="save-button">Add Note</button>
             </div>
         </form>
 

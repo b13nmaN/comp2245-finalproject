@@ -4,7 +4,7 @@ require_once('../config/config.php');
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data using $_POST superglobal
-    $contact_id = $_POST["contact_id"];
+    $contact_id = (int)$_POST["contact_id"];
     $comment = $_POST["comment"];
     $created_by = $_POST["created_by"];
 

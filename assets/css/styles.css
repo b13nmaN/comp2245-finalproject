@@ -150,7 +150,7 @@ aside nav ul li a:hover {
 
 
 
-form {
+form, .note-form{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -411,3 +411,6 @@ tr:nth-child(even) {
 }
 
 
+.note-form{
+    /* style the form here */
+}
