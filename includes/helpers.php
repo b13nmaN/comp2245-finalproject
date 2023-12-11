@@ -41,11 +41,6 @@ function login($conn, $email, $password) {
 
 // Function for user logout
 function logout(){
-    // Implement logout logic here
-    // Navigate to the login page
-    // Placeholder logic, you need to replace this with actual logout logic
-    session_start();
-    session_unset();
     session_destroy();
     header("Location: /comp2245-finalproject/login.php"); // Redirect to login page
     exit();

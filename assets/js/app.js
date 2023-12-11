@@ -14,11 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
         link.addEventListener('click', function (event) {
             event.preventDefault();
             // Check if the clicked element has the class "nav-link"
-            const page = this.getAttribute('href');
+            const page = this.getAttribute('link');
             console.log(`${page} clicked`);
             loadPage(page);
             window.history.pushState({ page: page }, null, page);
-            console.log(window.history.s);
         });
     });
 

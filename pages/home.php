@@ -6,10 +6,6 @@ $sanitizedInput = sanitize($filterType);
 $filteredArr = getFilterRequest($conn, $sanitizedInput);
 // get all all contacts
 $allContacts = getAllContacts($conn);
-
-
-
-var_dump($userData);
 ?>
 
 

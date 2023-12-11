@@ -20,10 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $emailSanitized, 
         $passwordSanitized,
     );
-    // var_dump($success);
-    // var_dump($userData);
-
-        
 
     if($success ?? null){
         session_start();
