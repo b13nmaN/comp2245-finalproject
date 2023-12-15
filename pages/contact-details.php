@@ -1,8 +1,9 @@
 <?php
 $contactName = $_GET['contactId'] ?? null;
 $currentContact = getCurrentContact($conn, $contactName);
-$contact_id = $currentContact['id'];
-$notes = loadNotes($conn, $contact_id);
+$userId = $userData['id'];
+$notes = loadNotes($conn, $userId);
+
 ?>
 
 <main>
@@ -31,6 +32,8 @@ $notes = loadNotes($conn, $contact_id);
             <p style="color: #666666;">Assigned to</p>
             <p><?= $currentContact['assigned_to']; ?></p>
         </div>
+    </div>
+    <div class="container-main">
         <div class="notes-container" style="margin-bottom: 30px;"> 
             <?php foreach ($notes as $note): 
                 $dateTime = new DateTime($note['created_at']);
@@ -44,8 +47,8 @@ $notes = loadNotes($conn, $contact_id);
             <?php endforeach ?>  
         </div>
         <form action="../includes/process-new-note.php" method="post" id="note-form">
-            <input type="hidden" name="contact_id" value="<?php echo $currentContact['id']; ?>">
-            <input type="hidden" name="created_by" value="<?php echo $currentContact['firstname']; ?>">
+            <input type="hidden" name="contact_id" value="<?php echo $userData['id']; ?>">
+            <input type="hidden" name="created_by" value="<?php echo $userData['firstname']; ?>">
             <div class="grid-item row-6-span-2" style="margin-bottom: 20px;"> <!-- Added margin-bottom for space -->
                 <label for="comment"><strong><?php echo "Add a note about " . $currentContact['firstname']; ?></strong></label>
                 <textarea name="comment" id="comment" cols="30" rows="10" style="width: 100%; height: 100px; border: 1px solid gray;"></textarea>

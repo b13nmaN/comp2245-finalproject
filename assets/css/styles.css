@@ -80,6 +80,11 @@ main {
 header {
     display: flex;
     justify-content: flex-start;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
     background-color: var(--color-dark-blue);
     grid-column: span 2;
     grid-row: 1;
@@ -110,6 +115,7 @@ aside nav {
 aside{
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     border-right: 1px solid #ccc;
+    height: 100vh;
 }
 
 aside nav ul {
@@ -397,9 +403,6 @@ tr:nth-child(even) {
     transition: all 0.5s ease-in;
 }
 
-#success-message.show {
-    display: flex;
-}
 
 #success-message p {
     margin-right: 10px;

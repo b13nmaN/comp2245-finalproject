@@ -1,17 +1,16 @@
 <?php
 $users = getAllUsers($conn);
-$user = $users[0]['firstname'];
+$user = $users;
+
 // dd($user);
 ?>
 
 <main>
-    <?php if ($success ?? null && $success === true) : ?>
-        <div id="success-message">
-            <i class="material-icons" >check_circle</i>
-            <p>User successfully added!</p>
-            <i id="close-message" class="material-icons" >close</i>
-        </div>
-    <?php endif; ?>
+    <div id="success-message" >
+        <i class="material-icons" >check_circle</i>
+        <p>User successfully added!</p>
+        <i id="close-message" class="material-icons" >close</i>
+    </div>
     <h2>New Contact</h2>
     <div class="container-main">
     <form action="../includes/process-new-contact.php" method="post" class="grid-form">
@@ -59,16 +58,19 @@ $user = $users[0]['firstname'];
         <div class="grid-item">
             <label for="assign-to">Assign to</label>
             <select id="assign-to" name="assign-to">
-                <option value="<?php echo $user; ?>"><?php echo $user; ?></option>
-                <!-- Add more options as needed -->
+                <?php foreach ($users as $user) : ?>
+                    <option value="<?php echo $user['firstname']. ' ' .$user['lastname'] ; ?>">
+                    <?php echo $user['firstname']. ' ' .$user['lastname']; ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
+        <input type="hidden" name="created_by" value="<?php echo $userData['firstname']. ' ' .$userData['lastname']; ?>">
 
         <div class="grid-item row-6-span-2">
             <button type="submit" class="save-button">Save</button>
         </div>
     </form>
-    </div>
+    </div> 
 </main>
 
 

@@ -151,16 +151,10 @@ function loadDetails($conn, $id){
 }
 
 // Function to assign contact to self
-function assignToMe($conn, $id){
-    // Implement logic to update assign_to field in the contact row
-    // Assign the contact to self
-    // Placeholder logic, you need to replace this with actual logic
-    session_start();
-    $userId = $_SESSION['user']['id'];
-
-    $query = "UPDATE contacts SET assigned_to = :userId WHERE id = :id";
+function assignToMe($conn, $username, $id){
+    $query = "UPDATE contacts SET assigned_to = :username WHERE id = :id";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':userId', $userId);
+    $stmt->bindParam(':username', $username);
     $stmt->bindParam(':id', $id);
     $stmt->execute();
 }
@@ -200,7 +194,7 @@ function loadNotes($conn, $contact_id){
 }
 
 
-// Create functions to valite email and telephone number
+// Create functions to validate email and telephone number
 
 ?>
 

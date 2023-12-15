@@ -12,6 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $company = $_POST["company"];
     $type = $_POST["type"];
     $assigned_to = $_POST["assign-to"];
+    $created_by = $_POST["created_by"];
 
     echo $assigned_to;
 
@@ -24,29 +25,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $companySanitized = sanitize($company);
     $typeSanitized = sanitize($type);
     $assigned_toSanitized = sanitize($assigned_to);
+    $created_bySanitized = sanitize($created_by);
     
     // Call the addNewContact function
-    $success = addNewContact(
-        $conn, 
-        $titleSanitized, 
-        $firstNameSanitized, 
-        $lastNameSanitized, 
-        $emailSanitized, 
-        $telephoneSanitized, 
-        $companySanitized, 
-        $typeSanitized, 
-        $assigned_toSanitized,
-        "$firstNameSanitized $lastNameSanitized"
-    );
+    // $success = addNewContact(
+    //     $conn, 
+    //     $titleSanitized, 
+    //     $firstNameSanitized, 
+    //     $lastNameSanitized, 
+    //     $emailSanitized, 
+    //     $telephoneSanitized, 
+    //     $companySanitized, 
+    //     $typeSanitized, 
+    //     $assigned_toSanitized,
+    //     $created_bySanitized
+    // );
 
-//     if ($success) {
-//         echo "Contact added successfully!";
-//     } else {
-//         echo "Error adding contact.";
-//     }
-// } else {
-//     // Redirect back to the form if accessed directly without submitting
-//     header("Location: index.html");
-//     exit();
+        // header('Location: /comp2245-finalproject/index.php/new-contact');
+        // exit();
 }
 ?>

@@ -25,10 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    const successMessage = document.querySelector('#success-message');
-    if (successMessage) {
-        successMessage.querySelector('#success-message').classList.remove('show');
-    }
+    // const successMessage = document.querySelector('#success-message');
+    // if (successMessage) {
+    //     successMessage.querySelector('#success-message').classList.remove('show');
+    // }
 
     const salesLeadButton = document.querySelector('#sales-lead');
     if (salesLeadButton) {
@@ -80,10 +80,16 @@ document.addEventListener('DOMContentLoaded', function () {
         form.addEventListener("submit", function(event) {
             console.log("Form submitted");
             event.preventDefault();
-            loadPage('/comp2245-finalproject/index.php/add-user');
-            displayMessage();
+            // Get the current page url
+            let url = window.location.href;
+            // Use the loadPage function with the url as an argument
+            loadPage(url);
+            setTimeout(() => {
+                displayMessage();
+            }, 1000);
         });
     }
+
 
     const closeButton = document.querySelector('#close-message');
     if (closeButton) {
@@ -169,5 +175,15 @@ async function SendContactName(contactId, url) {
 }
 
 function displayMessage() {
-    document.getElementById('success-message').classList.add('show');
+    // alert('Contact added successfully');
+    console.log('display message');
+    let successMessage = document.querySelector('#success-message');
+
+    successMessage.style.display = "flex";
+    console.log(successMessage);
+
+    setTimeout(() => {
+        successMessage.style.display = "none";
+    }, 3000);
+    
 }
