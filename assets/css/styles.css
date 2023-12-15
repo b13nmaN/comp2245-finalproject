@@ -13,6 +13,12 @@ body {
     overflow: hidden;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+
 /* Variables */
 :root {
     /* dark blue */
@@ -408,3 +414,29 @@ tr:nth-child(even) {
     cursor: pointer;
 }
 /*---------------------------------------------Login Page Style--------------------------------------------------- */
+ .form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+#login {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    min-width: 45%;
+    max-height: 50%;
+}
+
+#login input{
+    width: 100%;
+}
+
+footer{
+    padding: 15px;
+    background-color: var(--color-light-gray);
+}
