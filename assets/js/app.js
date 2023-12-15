@@ -1,12 +1,8 @@
 // No refresh js
 // assets/js/app.js
 document.addEventListener('DOMContentLoaded', function () {
-    
     console.log('DOM fully loaded and parsed');
-    let successMessage = document.getElementById('success-message');
-    if (successMessage) {
-        successMessage.getElementById('success-message').classList.remove('show');
-    }
+    
     // Attach click event listeners to all navigation links
     const navLinks = [...document.getElementsByTagName('a')]
     console.log(navLinks);
@@ -14,11 +10,10 @@ document.addEventListener('DOMContentLoaded', function () {
         link.addEventListener('click', function (event) {
             event.preventDefault();
             // Check if the clicked element has the class "nav-link"
-            const page = this.getAttribute('href');
+            const page = this.getAttribute('link');
             console.log(`${page} clicked`);
             loadPage(page);
             window.history.pushState({ page: page }, null, page);
-            console.log(window.history.s);
         });
     });
 
@@ -30,6 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    const successMessage = document.querySelector('#success-message');
+    if (successMessage) {
+        successMessage.querySelector('#success-message').classList.remove('show');
+    }
 
     const salesLeadButton = document.querySelector('#sales-lead');
     if (salesLeadButton) {
@@ -113,7 +112,23 @@ function loadPage(page) {
         })
         .catch(error => console.error('Error:', error));
     }
+function loginPage(page) {
+    fetch(page)
+        .then(response => response.text())
+        .then(data => {
+            //parse html to get main
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, 'text/html');
+            console.log(doc);
 
+            let main = doc.querySelector('.body')
+            let mainToString = main.innerHTML
+            console.log(main);
+            // Update the content area with the loaded HTML
+            document.querySelector('.body').innerHTML = mainToString; // Use querySelector instead of getElementsByClassName
+        })
+        .catch(error => console.error('Error:', error));
+    }
 async function handleFilterRequest(filterType) {
     console.log(filterType);
 	await fetch('/comp2245-finalproject/index.php/home?filterType=' + filterType)
