@@ -17,7 +17,7 @@ $routes = [
     '/comp2245-finalproject/index.php/new-contact' => 'pages/new-contact.php',
     '/comp2245-finalproject/index.php/login' => 'pages/login.php',
     '/comp2245-finalproject/index.php/contact-details' => 'pages/contact-details.php',
-    '/comp2245-finalproject/index.php/add-user' => 'pages/add-user.php'
+    '/comp2245-finalproject/index.php/add-user' => 'pages/add-user.php',
 ];
 
 if (array_key_exists($uri, $routes)) {

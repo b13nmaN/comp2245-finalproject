@@ -19,40 +19,30 @@ function sanitize($input){
 }
 
 // Function for user login
-function login($conn, $email, $password){
-    // Example of using sanitize function
-    $sanitizedEmail = sanitize($email);
-    $sanitizedPassword = sanitize($password);
-
-    // Your login logic here
-    // Placeholder logic, you need to replace this with actual login logic
-    $query = "SELECT * FROM users WHERE email = :email AND password = :password";
+function login($conn, $email, $password) {
+    $query = "SELECT * FROM users WHERE email = :email";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':email', $sanitizedEmail);
-    $stmt->bindParam(':password', $sanitizedPassword);
+    $stmt->bindParam(':email', $email);
     $stmt->execute();
 
-    // Check if login is successful
+    // Check if user exists
     if ($stmt->rowCount() > 0) {
-        // Log in successful
-        // Use sessions to store user information
-        $_SESSION['user'] = $stmt->fetch(PDO::FETCH_ASSOC);
-        return true;
-    } else {
-        // Login failed
-        return false;
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (password_verify($password, $user['password'])) {
+            // var_dump($user);
+            
+            return $user;
+        }
     }
+    // Login failed
+    return false;
 }
+
 
 // Function for user logout
 function logout(){
-    // Implement logout logic here
-    // Navigate to the login page
-    // Placeholder logic, you need to replace this with actual logout logic
-    session_start();
-    session_unset();
     session_destroy();
-    header("Location: login.php"); // Redirect to login page
+    header("Location: /comp2245-finalproject/login.php"); // Redirect to login page
     exit();
 }
 
