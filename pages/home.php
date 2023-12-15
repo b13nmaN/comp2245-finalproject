@@ -8,6 +8,7 @@ $filteredArr = getFilterRequest($conn, $sanitizedInput);
 // get all all contacts
 $allContacts = getAllContacts($conn);
 
+
 ?>
 
 
