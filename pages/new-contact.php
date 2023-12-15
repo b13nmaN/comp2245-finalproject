@@ -5,17 +5,14 @@ $user = $users[0]['firstname'];
 ?>
 
 <main>
-    <div id="success-message">
-        <i class="material-icons" >check_circle</i>
-        <p>User successfully added!</p>
-        <i id="close-message" class="material-icons" >close</i>
-    </div>
+    <?php if ($success ?? null && $success === true) : ?>
+        <div id="success-message">
+            <i class="material-icons" >check_circle</i>
+            <p>User successfully added!</p>
+            <i id="close-message" class="material-icons" >close</i>
+        </div>
+    <?php endif; ?>
     <h2>New Contact</h2>
-    <div class="success-message">
-        <?php if ($success ?? null && $success === true) : ?>
-            <p>Contact created successfully!</p>
-        <?php endif; ?>
-    </div>
     <div class="container-main">
     <form action="../includes/process-new-contact.php" method="post" class="grid-form">
         <div class="grid-item row-1-span-2">

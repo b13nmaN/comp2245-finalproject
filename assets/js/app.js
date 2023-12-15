@@ -1,12 +1,8 @@
 // No refresh js
 // assets/js/app.js
 document.addEventListener('DOMContentLoaded', function () {
-    loadPage('comp2245-finalproject/index.php/login');
     console.log('DOM fully loaded and parsed');
-    let successMessage = document.getElementById('success-message');
-    if (successMessage) {
-        successMessage.getElementById('success-message').classList.remove('show');
-    }
+    
     // Attach click event listeners to all navigation links
     const navLinks = [...document.getElementsByTagName('a')]
     console.log(navLinks);
@@ -29,6 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    const successMessage = document.querySelector('#success-message');
+    if (successMessage) {
+        successMessage.querySelector('#success-message').classList.remove('show');
+    }
 
     const salesLeadButton = document.querySelector('#sales-lead');
     if (salesLeadButton) {

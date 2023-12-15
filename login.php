@@ -11,7 +11,8 @@
 </head>
 
 <body>
-  <header>
+  <header id="logo-wrapper">
+    <img src="assets/images/dolphin.svg" alt="dolphinlogo">
     <p>Dolphin CRM</p>
   </header>
   <div class="form-container">
