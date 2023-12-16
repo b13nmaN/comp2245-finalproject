@@ -159,6 +159,7 @@ aside nav ul li a {
 
 aside nav ul li a:hover {
     color: var(--color-purple);
+    cursor: pointer;
 }
 
 /* -----------------------------------new contact page styles--------------------------------------------- */
@@ -390,6 +391,8 @@ tr:nth-child(even) {
 
 
 /*---------------------------------------------add new contact page styles--------------------------------------------------- */
+
+
 #success-message {
     display: none;
     align-items: center;
@@ -400,9 +403,15 @@ tr:nth-child(even) {
     border-radius: 5px; 
     max-width: 50%;
     border: 2px solid #12a617;
-    transition: all 0.5s ease-in;
+    opacity: 0;
+    
 }
 
+#success-message.show {
+    display: flex;
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+}
 
 #success-message p {
     margin-right: 10px;

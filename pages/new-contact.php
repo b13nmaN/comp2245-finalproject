@@ -12,6 +12,7 @@ $user = $users;
         <i id="close-message" class="material-icons" >close</i>
     </div>
     <h2>New Contact</h2>
+
     <div class="container-main">
     <form action="../includes/process-new-contact.php" method="post" class="grid-form">
         <div class="grid-item row-1-span-2">
@@ -24,27 +25,43 @@ $user = $users;
 
         <div class="grid-item">
             <label for="FirstName">First Name</label>
-            <input type="text" id="FirstName" name="FirstName" required placeholder="John">
+            <input type="text" id="FirstName" name="FirstName"  placeholder="John">
         </div>
+        <?php
+        if (isset($errors['fname'])): {
+            echo '<p class="error">' . $errors['fname'] . '</p>';
+        }
+        ?>
+        <?php endif;?>
 
         <div class="grid-item">
             <label for="LastName">Last Name</label>
-            <input type="text" id="LastName" name="LastName" required placeholder="Doe">
+            <input type="text" id="LastName" name="LastName"  placeholder="Doe">
         </div>
-
+        
+        <?php if (isset($errors['lname'])): {
+            echo '<p class="error">' . $errors['lname'] . '</p>';
+        }?>
+        <?php endif;?>
         <div class="grid-item">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required placeholder="john.doe@example.com">
+            <input type="email" id="email" name="email"  placeholder="john.doe@example.com">
         </div>
-
+        <?php if (isset($errors['email'])): {
+            echo '<p class="error">' . $errors['email'] . '</p>';
+        }?>
+        <?php elseif (isset($errors['inval_email'])): {
+            echo '<p class="error">' . $errors['inval_email'] . '</p>';
+        }?>
+        <?php endif;?>
         <div class="grid-item">
             <label for="number">Telephone</label>
-            <input type="tel" id="number" name="number" required placeholder="(123) 456-7890">
+            <input type="tel" id="number" name="number"  placeholder="(123) 456-7890">
         </div>
 
         <div class="grid-item">
             <label for="company">Company</label>
-            <input type="text" id="company" name="company" required placeholder="ABC Corporation">
+            <input type="text" id="company" name="company"  placeholder="ABC Corporation">
         </div>
 
         <div class="grid-item">

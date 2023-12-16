@@ -62,17 +62,18 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     
-    const viewButtons = document.querySelectorAll('.view-button');
-    if (viewButtons) {
-        // Add click event listener to each "View" button
-        viewButtons.forEach(function (button) {
-            button.addEventListener("click", function () {
-                // Get the contact ID from the data-contact-id attribute
-                let contactId = button.getAttribute("data-contact-id");
-                SendContactName(contactId, '/comp2245-finalproject/index.php/contact-details')
-            });
-        });
+    // Add click event listener to the common parent element
+    document.querySelector('main').addEventListener('click', function (event) {
+    // Check if the clicked element has the class "view-button"
+    if (event.target.classList.contains('view-button')) {
+        console.log("View button clicked");
+
+        // Get the contact ID from the data-contact-id attribute
+        let contactId = event.target.getAttribute("data-contact-id");
+        SendContactName(contactId, '/comp2245-finalproject/index.php/contact-details');
     }
+});
+
     // Get the form element by its className
     let form = document.querySelector("form");
 
@@ -175,15 +176,17 @@ async function SendContactName(contactId, url) {
 }
 
 function displayMessage() {
-    // alert('Contact added successfully');
-    console.log('display message');
-    let successMessage = document.querySelector('#success-message');
+    let successMessage = document.getElementById('success-message');
 
-    successMessage.style.display = "flex";
-    console.log(successMessage);
-
-    setTimeout(() => {
-        successMessage.style.display = "none";
-    }, 3000);
-    
+    if (successMessage) {
+        console.log(successMessage);
+        successMessage.classList.add('show');
+        console.log("After");
+        
+        // Close the message after 3 seconds (adjust the delay as needed)
+        setTimeout(() => {
+            console.log("timeout");
+            successMessage.classList.remove('show');
+        }, 1000);
+    }
 }
