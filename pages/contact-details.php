@@ -9,7 +9,7 @@ $notes = loadNotes($conn, $contact_id);
     <div class="dashboard-header">
         <div class="dashboard-header-left">
             <div class="dashboard-header-title">
-                <h2><strong><?php echo $currentContact['title'] . "." . $currentContact['firstname'] . " " . $currentContact['lastname']; ?></strong></h2>
+                <p><?php echo $currentContact['title'] . ". " . $currentContact['firstname'] . " " . $currentContact['lastname']; ?></p>
                 <p style="color: #666666;"><?php echo "Created on " . date("F j, Y", strtotime($currentContact['created_at'])) . " by " . $currentContact['created_by']; ?></p>
                 <p style="color: #666666;"><?php echo "Updated on " . date("F j, Y", strtotime($currentContact['updated_at'])); ?></p>
             </div>

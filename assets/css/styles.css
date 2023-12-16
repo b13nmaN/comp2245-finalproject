@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 /* Reset styles */
+
 * {
     margin: 0;
     padding: 0;
@@ -8,8 +10,8 @@
 /* ---------------------------------------------------General styles------------------------------------------------- */
 body {
     min-height: 100vh;
-    font-family: 'Inter'; font-size: 16px;
-    font-weight: 400;
+    font-family: 'Inter', sans-serif; 
+    font-size: 16px;
     /* overflow: hidden; */
 }
 
@@ -402,6 +404,17 @@ tr:nth-child(even) {
     font-size: 56px;
     color: #ccc;
     margin-right: 2px;
+}
+
+.dashboard-header-title p:first-child{
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.dashboard-header-title p:not(p:first-child){
+    font-size: 12px;
+    font-weight:600;
+    color: #ccc;
 }
 
 
