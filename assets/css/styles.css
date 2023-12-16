@@ -380,6 +380,41 @@ tr:nth-child(even) {
     margin-right: 10px;
 }
 
+.dashboard-header {
+    display: flex;
+    align-items: center;
+}
+
+.dashboard-header .button-contain {
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dashboard-header .button-contain button {
+    margin-left: 10px;
+}
+
+.contact-info-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px; 
+    box-sizing: border-box;
+}
+
+.contact-info-container p {
+    margin: 0;
+    padding: 5px;
+}
+.info-section {
+    margin-bottom: 5px;
+}
+
+.info-heading {
+    margin: 0;
+    font-weight: bold;
+}
+
 
 
 /*---------------------------------------------users page styles--------------------------------------------------- */
