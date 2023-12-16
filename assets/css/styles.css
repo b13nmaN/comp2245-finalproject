@@ -18,7 +18,10 @@ body {
     flex-direction: column;
 }
 
-
+p{
+    display: flex;
+    align-items: center;
+}
 /* Variables */
 :root {
     /* dark blue */
@@ -92,8 +95,6 @@ header {
 }
 
 header p {
-    display: flex;
-    align-items: center;
     margin-left: 10px;
     color: white;
 }
@@ -383,16 +384,29 @@ tr:nth-child(even) {
 .dashboard-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 15px;
 }
 
-.dashboard-header .button-contain {
-    width: 100px;
+
+.dashboard-header-right{
     display: flex;
     justify-content: space-between;
 }
+.dashboard-header-left{
+    display: flex;
+}
+.dashboard-header-left::before{
+    font-family: 'Material Icons';
+    content: '\e853';
+    font-size: 56px;
+    color: #ccc;
+    margin-right: 2px;
+}
 
-.dashboard-header .button-contain button {
-    margin-left: 10px;
+
+.dashboard-header-right button:first-child{
+    margin-right: 5px;
 }
 
 .contact-info-container {
