@@ -22,7 +22,7 @@ $notes = loadNotes($conn, $contact_id);
     </div>
 
     <div class="container-main">
-    <div class="contact-info-container" style="margin-bottom: 30px;">
+    <div class="contact-info-container">
         <div class="info-section">
             <p class="info-heading" style="color: #666666;">Email</p>
             <p class="info-content"><?= $currentContact['email']; ?></p>
@@ -45,7 +45,7 @@ $notes = loadNotes($conn, $contact_id);
     </div>
     </div>
 
-        <div class="notes-container" style="margin-bottom: 30px;"> 
+        <div class="notes-container"> 
             <p> Notes </p>
             <?php foreach ($notes as $note): 
                 $dateTime = new DateTime($note['created_at']);
