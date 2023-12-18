@@ -442,6 +442,48 @@ tr:nth-child(even) {
     font-weight: bold;
 }
 
+#section-1 {
+    padding: 20px;
+}
+#section-2 {
+    padding: 0px;
+}
+
+.note{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.note-icon{
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+}
+.note-icon p::before{
+    font-family: 'Material Icons';
+    content: '\e745';
+    font-size: 24px;
+}
+
+.notes-container, #note-form{
+    padding: 0 20px;
+}
+
+#note-form{
+    background-color: var(--color-light-gray);
+}
+
+#comment{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    resize: none;
+}
+
+.contact-details{
+    background-color: #fff;
+}
 
 
 /*---------------------------------------------users page styles--------------------------------------------------- */

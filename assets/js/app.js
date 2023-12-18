@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(`${page} clicked`);
             loadPage(page);
             window.history.pushState({ page: page }, null, page);
-            console.log(window.history.s);
         });
     });
 
