@@ -1,9 +1,10 @@
 <?php
-require_once('helpers.php');
-require_once('../config/config.php');
+require('helpers.php');
+require('../config/config.php');
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    echo "test";
     // Retrieve form data using $_POST superglobal
     $title = $_POST["Title"];
     $firstName = $_POST["FirstName"];

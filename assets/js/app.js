@@ -74,22 +74,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-    // Get the form element by its className
-    let form = document.querySelector("form");
 
-    if(form) {
-        form.addEventListener("submit", function(event) {
+// This code will be executed when the form is submitted
+    document.addEventListener('submit', function (event) {
+        if (event.target.tagName.toLowerCase() === 'form') {
             console.log("Form submitted");
             event.preventDefault();
-            // Get the current page url
             let url = window.location.href;
-            // Use the loadPage function with the url as an argument
             loadPage(url);
             setTimeout(() => {
                 displayMessage();
             }, 1000);
-        });
-    }
+        }
+    });
+
 
 
     const closeButton = document.querySelector('#close-message');
@@ -187,6 +185,6 @@ function displayMessage() {
         setTimeout(() => {
             console.log("timeout");
             successMessage.classList.remove('show');
-        }, 1000);
+        }, 2000);
     }
 }
