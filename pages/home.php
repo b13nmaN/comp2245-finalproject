@@ -6,6 +6,10 @@ $sanitizedInput = sanitize($filterType);
 $filteredArr = getFilterRequest($conn, $sanitizedInput);
 // get all all contacts
 $allContacts = getAllContacts($conn);
+
+if(!isset($_SESSION['user'])) {
+    header("Location: /comp2245-finalproject/login.php");
+}
 ?>
 
 
@@ -62,7 +66,7 @@ $allContacts = getAllContacts($conn);
                         <td><?= $contact['email'] ?></td>
                         <td><?= $contact['company'] ?></td>
                         <td><?= $contact['type'] ?></td>
-                        <td><p class="view-button">View</p></td>
+                        <td><p class="view-button"  data-contact-id="<?= $contact['firstname'] ?>">View</p></td>
                     </tr>
                 <?php endforeach; ?>
             </table>

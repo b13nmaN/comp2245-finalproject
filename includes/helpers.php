@@ -38,14 +38,6 @@ function login($conn, $email, $password) {
     return false;
 }
 
-
-// Function for user logout
-function logout(){
-    session_destroy();
-    header("Location: /comp2245-finalproject/login.php"); // Redirect to login page
-    exit();
-}
-
 // Function to add a new user
 function newUser($conn, $firstName, $lastname, $email, $password, $role){
 
@@ -76,13 +68,21 @@ function getAllUsers($conn){
     return $users;
 }
 
-// Function to add a new contact
-function addNewContact($conn, $title, $fname, $lname, $email, $telephone, $company, $type, $assigned_to){
-    // Example of using sanitize function
+// Function to get a specific contact by name
+function getCurrentContact($conn, $contactName) {
+    $query = "SELECT * FROM contacts WHERE firstname = :firstname";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':firstname', $contactName);
+    $stmt->execute();
+    $currentContact = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $currentContact;
+}
 
-    // Your add new contact logic here
+
+// Function to add a new contact
+function addNewContact($conn, $title, $fname, $lname, $email, $telephone, $company, $type, $assigned_to, $created_by){
     // Placeholder logic, you need to replace this with actual logic
-    $query = "INSERT INTO contacts ( title, firstname, lastname, email, telephone, company, type, assigned_to, created_at, updated_at) VALUES ( :title, :fname, :lname, :email, :telephone, :company, :type, :assigned_to, NOW(), NOW())";
+    $query = "INSERT INTO contacts ( title, firstname, lastname, email, telephone, company, type, assigned_to, created_by, created_at,  updated_at) VALUES ( :title, :fname, :lname, :email, :telephone, :company, :type, :assigned_to, :created_by, NOW(), NOW())";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':title', $title);
     $stmt->bindParam(':fname', $fname);
@@ -92,6 +92,7 @@ function addNewContact($conn, $title, $fname, $lname, $email, $telephone, $compa
     $stmt->bindParam(':company', $company);
     $stmt->bindParam(':type', $type);
     $stmt->bindParam(':assigned_to', $assigned_to);
+    $stmt->bindParam(':created_by', $created_by);
     $stmt->execute();
 
     // Check if contact creation is successful
@@ -142,16 +143,10 @@ function loadDetails($conn, $id){
 }
 
 // Function to assign contact to self
-function assignToMe($conn, $id){
-    // Implement logic to update assign_to field in the contact row
-    // Assign the contact to self
-    // Placeholder logic, you need to replace this with actual logic
-    session_start();
-    $userId = $_SESSION['user']['id'];
-
-    $query = "UPDATE contacts SET assigned_to = :userId WHERE id = :id";
+function assignToMe($conn, $username, $id){
+    $query = "UPDATE contacts SET assigned_to = :username WHERE id = :id";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':userId', $userId);
+    $stmt->bindParam(':username', $username);
     $stmt->bindParam(':id', $id);
     $stmt->execute();
 }
@@ -168,25 +163,20 @@ function switchMeToSalesLead($conn, $id){
 }
 
 // Function to add a note to a contact
-function addNote($conn, $note, $id){
-    // Implement logic to add a note to the notes table
-    // Use join to filter based on id in the contacts table
-    // Placeholder logic, you need to replace this with actual logic
-    $query = "INSERT INTO notes (contact_id, note, created_at) VALUES (:id, :note, NOW())";
+function addNote($conn, $contact_id, $comment, $created_by){
+    $query = "INSERT INTO notes (contact_id, comment, created_by, created_at) VALUES (:contact_id, :comment,:created_by, NOW())";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':id', $id);
-    $stmt->bindParam(':note', $note);
+    $stmt->bindParam(':contact_id', $contact_id, PDO::PARAM_INT);
+    $stmt->bindParam(':comment', $comment);
+    $stmt->bindParam(':created_by', $created_by, PDO::PARAM_STR);
     $stmt->execute();
 }
 
 // Function to load notes for a contact
-function loadNotes($conn, $id){
-    // Implement logic to load notes from the notes table
-    // Use join to join and filter the table
-    // Placeholder logic, you need to replace this with actual logic
-    $query = "SELECT * FROM notes WHERE contact_id = :id";
+function loadNotes($conn, $contact_id){
+    $query = "SELECT comment, created_at, created_by FROM notes WHERE contact_id = :contact_id";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':contact_id', $contact_id, PDO::PARAM_INT);
     $stmt->execute();
 
     // Fetch notes
@@ -196,7 +186,7 @@ function loadNotes($conn, $id){
 }
 
 
-// Create functions to valite email and telephone number
+// Create functions to validate email and telephone number
 
 ?>
 

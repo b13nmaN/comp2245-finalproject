@@ -1,9 +1,10 @@
 <?php
 session_start();
 
+// Check if the user is set in the session
 if ($_SESSION['user'] ?? null) {
     $userData = $_SESSION['user'];
-} else {
-    echo "User data not set in the session.";
+    // Check if the user is already on the home page
 }
-// Rest of your code
+?>
+
