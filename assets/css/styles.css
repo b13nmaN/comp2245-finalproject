@@ -18,6 +18,10 @@ body {
     flex-direction: column;
 }
 
+label {
+    margin-bottom: 10px;
+}
+
 
 /* Variables */
 :root {
@@ -115,7 +119,7 @@ aside nav {
 aside{
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     border-right: 1px solid #ccc;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 aside nav ul {
@@ -500,3 +504,8 @@ tr:nth-child(even) {
     padding: 20px;
     border-top: 1px solid var(--color-light-gray);
     }
+
+/*---------------------------------------------error Styles--------------------------------------------------- */
+.error {
+    color: red;
+}

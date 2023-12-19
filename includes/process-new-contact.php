@@ -1,6 +1,4 @@
 <?php
-require('helpers.php');
-require('../config/config.php');
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -33,9 +31,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors['inval_email'] = "Invalid email format.";
     }
 
+    if (empty($company)) {
+        $errors['company'] = "Company is required.";
+    }
+
     // Add more validation rules as needed for other fields
 
-    if (!empty($errors)) {
+    else  {
         // Sanitize input
         $titleSanitized = sanitize($title);
         $firstNameSanitized = sanitize($firstName);
@@ -48,18 +50,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $created_bySanitized = sanitize($created_by);
 
         // Call the addNewContact function
-        // $success = addNewContact(
-        //     $conn, 
-        //     $titleSanitized, 
-        //     $firstNameSanitized, 
-        //     $lastNameSanitized, 
-        //     $emailSanitized, 
-        //     $telephoneSanitized, 
-        //     $companySanitized, 
-        //     $typeSanitized, 
-        //     $assigned_toSanitized,
-        //     $created_bySanitized
-        // );
+        addNewContact(
+            $conn, 
+            $titleSanitized, 
+            $firstNameSanitized, 
+            $lastNameSanitized, 
+            $emailSanitized, 
+            $telephoneSanitized, 
+            $companySanitized, 
+            $typeSanitized, 
+            $assigned_toSanitized,
+            $created_bySanitized
+        );
 
     }
 }

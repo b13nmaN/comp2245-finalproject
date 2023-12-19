@@ -2,71 +2,8 @@
 $users = getAllUsers($conn);
 $user = $users;
 
-// dd($user);
 
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data using $_POST superglobal
-    $title = $_POST["Title"];
-    $firstName = $_POST["FirstName"];
-    $lastName = $_POST["LastName"];
-    $email = $_POST["email"];
-    $telephone = $_POST["number"];
-    $company = $_POST["company"];
-    $type = $_POST["type"];
-    $assigned_to = $_POST["assign-to"];
-    $created_by = $_POST["created_by"];
-
-    echo $assigned_to;
-
-    // Validate form inputs
-    $errors = [];
-
-    if (empty($firstName)) {
-        $errors['fname'] = "First Name is required.";
-    }
-
-    if (empty($lastName)) {
-        $errors['lname'] = "Last Name is required.";
-    }
-
-    if (empty($email)) {
-        $errors['email'] = "Email is required.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors['inval_email'] = "Invalid email format.";
-    }
-
-    // Add more validation rules as needed for other fields
-
-    if (!empty($errors)) {
-        // Sanitize input
-        $titleSanitized = sanitize($title);
-        $firstNameSanitized = sanitize($firstName);
-        $lastNameSanitized = sanitize($lastName);
-        $emailSanitized = sanitize($email);
-        $telephoneSanitized = sanitize($telephone);
-        $companySanitized = sanitize($company);
-        $typeSanitized = sanitize($type);
-        $assigned_toSanitized = sanitize($assigned_to);
-        $created_bySanitized = sanitize($created_by);
-
-        // Call the addNewContact function
-        // $success = addNewContact(
-        //     $conn, 
-        //     $titleSanitized, 
-        //     $firstNameSanitized, 
-        //     $lastNameSanitized, 
-        //     $emailSanitized, 
-        //     $telephoneSanitized, 
-        //     $companySanitized, 
-        //     $typeSanitized, 
-        //     $assigned_toSanitized,
-        //     $created_bySanitized
-        // );
-
-    }
-}
-
+include 'includes/process-new-contact.php';
 ?>
 
 <main>
@@ -75,15 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <p>User successfully added!</p>
         <i id="close-message" class="material-icons" >close</i>
     </div>
-    <?php if (isset($errors)): ?>
-    <?php foreach ($errors as $error): ?>
-        <p><?php echo $error; ?></p>
-    <?php endforeach; ?>
-    <?php endif; ?>
     <h2>New Contact</h2>
 
     <div class="container-main">
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="grid-form">
+    <form action="../includes/process-new-contact.php" method="post" class="grid-form">
         <div class="grid-item row-1-span-2">
             <label for="Title">Title</label>
             <select id="Title" name="Title">
@@ -95,34 +27,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="grid-item">
             <label for="FirstName">First Name</label>
             <input type="text" id="FirstName" name="FirstName"  placeholder="John">
+            <?php if (isset($errors['fname'])):?>
+            <p class="error"><?=$errors['fname']?> </p>
+            <?php endif;?>
         </div>
-        <?php
-        if (isset($errors['fname'])): {
-            echo '<p class="error">' . $errors['fname'] . '</p>';
-        }
-        ?>
-        <?php endif;?>
+        
 
         <div class="grid-item">
             <label for="LastName">Last Name</label>
             <input type="text" id="LastName" name="LastName"  placeholder="Doe">
+            <?php if (isset($errors['fname'])):?>
+            <p class="error"><?=$errors['fname']?> </p>
+            <?php endif;?>
         </div>
         
-        <?php if (isset($errors['lname'])): {
-            echo '<p class="error">' . $errors['lname'] . '</p>';
-        }?>
-        <?php endif;?>
         <div class="grid-item">
             <label for="email">Email</label>
             <input type="email" id="email" name="email"  placeholder="john.doe@example.com">
+            <?php if (isset($errors['fname'])):?>
+            <p class="error"><?=$errors['fname']?> </p>
+            <?php elseif (isset($errors['inval_email'])):?>
+            <p class="error"><?=$errors['inval_email']?> </p>
+            <?php endif;?>
         </div>
-        <?php if (isset($errors['email'])): {
-            echo '<p class="error">' . $errors['email'] . '</p>';
-        }?>
-        <?php elseif (isset($errors['inval_email'])): {
-            echo '<p class="error">' . $errors['inval_email'] . '</p>';
-        }?>
-        <?php endif;?>
         <div class="grid-item">
             <label for="number">Telephone</label>
             <input type="tel" id="number" name="number"  placeholder="(123) 456-7890">
@@ -131,6 +58,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="grid-item">
             <label for="company">Company</label>
             <input type="text" id="company" name="company"  placeholder="ABC Corporation">
+            <?php if (isset($errors['company'])):?>
+            <p class="error"><?=$errors['company']?> </p>
+            <?php endif;?>
         </div>
 
         <div class="grid-item">

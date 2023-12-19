@@ -5,6 +5,8 @@ $contact_id = $currentContact['id'];
 $notes = loadNotes($conn, $contact_id);
 ?>
 
+<?php include 'includes/process-new-note.php'; ?>
+
 <main>
     </div>
     <div class="dashboard-header">

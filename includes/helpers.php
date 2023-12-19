@@ -38,14 +38,6 @@ function login($conn, $email, $password) {
     return false;
 }
 
-
-// Function for user logout
-function logout(){
-    session_destroy();
-    header("Location: /comp2245-finalproject/login.php"); // Redirect to login page
-    exit();
-}
-
 // Function to add a new user
 function newUser($conn, $firstName, $lastname, $email, $password, $role){
 
