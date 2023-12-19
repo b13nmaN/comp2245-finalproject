@@ -10,7 +10,8 @@ $notes = loadNotes($conn, $contact_id);
 <?php include 'includes/process-new-note.php'; ?>
 
 <main>
-    </div>
+
+    
     <div class="dashboard-header">
         <div class="dashboard-header-left">
             <div class="dashboard-header-title">

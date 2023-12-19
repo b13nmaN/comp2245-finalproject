@@ -222,23 +222,23 @@ async function handleFilterRequest(filterType) {
 }
 
 async function SendContactName(contactId) {
-	await fetch('/comp2245-finalproject/index.php/contact-details?contactId=' + contactId)
+    await fetch('/comp2245-finalproject/index.php/contact-details?contactId=' + contactId)
         .then(response => response.text())
-        
         .then(data => {
-            console.log('this is the data', data)
             const parser = new DOMParser();
             const doc = parser.parseFromString(data, 'text/html');
-            console.log(doc);
+            let main = doc.querySelector('main');
 
-            let main = doc.querySelector('main')
-            let mainToString = main.innerHTML
-            console.log(main);
+            // Set the background color of the main element to white
+            main.style.backgroundColor = 'white';
+
+            let mainToString = main.innerHTML;
+
             // Update the content area with the loaded HTML
             document.querySelector('main').innerHTML = mainToString;
-            
-        })
+        });
 }
+
 
 function displayMessage() {
     let successMessage = document.getElementById('success-message');

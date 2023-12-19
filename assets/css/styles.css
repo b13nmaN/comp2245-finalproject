@@ -44,11 +44,13 @@ p{
 
 /* 2 Column Layout */
 .container {
-    height: 100vh;
+    min-height: 100vh;
     display: grid;
     grid-template-columns: 15% 85%;
     grid-template-rows: auto 95%;
 }
+
+
 
 nav {
     background-color: var(--color-purple);
@@ -122,7 +124,6 @@ aside nav {
 aside{
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     border-right: 1px solid #ccc;
-    min-height: 100vh;
 }
 
 aside nav ul {
