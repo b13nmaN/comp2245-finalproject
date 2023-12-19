@@ -1,3 +1,8 @@
+<?php
+include 'includes/process-new-user.php';
+var_dump($errors);
+?>
+
 <main>
     <div id="success-message">
         <i class="material-icons" >check_circle</i>
@@ -10,22 +15,34 @@
 
             <div class="grid-item">
                 <label for="FirstName">First Name</label>
-                <input type="text" id="FirstName" name="FirstName" required placeholder="John">
+                <input type="text" id="FirstName" name="FirstName"  placeholder="John">
+                <?php if (isset($errors['fname'])):?>
+                <p class="error"><?=$errors['fname']?> </p>
+                <?php endif;?>
             </div>
 
             <div class="grid-item">
                 <label for="LastName">Last Name</label>
-                <input type="text" id="LastName" name="LastName" required placeholder="Doe">
+                <input type="text" id="LastName" name="LastName"  placeholder="Doe">
+                <?php if (isset($errors['lname'])):?>
+                <p class="error"><?=$errors['lname']?> </p>
+                <?php endif;?>
             </div>
 
             <div class="grid-item">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required placeholder="john.doe@example.com">
+                <input type="email" id="email" name="email"  placeholder="john.doe@example.com">
+                <?php if (isset($errors['email'])):?>
+                <p class="error"><?=$errors['email']?> </p>
+                <?php endif;?>
             </div>
 
             <div class="grid-item">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" >
+                <?php if (isset($errors['password'])):?>
+                <p class="error"><?=$errors['password']?> </p>
+                <?php endif;?>
             </div>
 
             <div class="grid-item">

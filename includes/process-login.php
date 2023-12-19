@@ -1,6 +1,5 @@
 <?php
-require_once('helpers.php');
-require_once('../config/config.php');
+
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data using $_POST superglobal
@@ -9,10 +8,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
 
-    // sanitize input
+    // validate input
+    $errors = [];
+    if(empty($email)){
+        $errors['email'] = "Email is required";
+    }
+    if(empty($password)){
+        $errors['password'] = "Password is required";
+    }
 
+    else{
+    // sanitize input
     $emailSanitized = sanitize($email);
     $passwordSanitized = sanitize($password);
+    
     
     // Call the addNewContact function
     $success = login(
@@ -21,14 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $passwordSanitized,
     );
 
-    if($success ?? null){
-        session_start();
-        $_SESSION['user'] = $success;
-        header("Location: /comp2245-finalproject/index.php/home");
-        exit();
-    }
-    else{
-        echo "Enter correct email and password";
+    session_start();
+    $_SESSION['user'] = $success;
+    
     }
 
-}
+} 

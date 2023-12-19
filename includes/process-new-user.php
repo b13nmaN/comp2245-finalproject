@@ -1,6 +1,4 @@
 <?php
-require_once('helpers.php');
-require_once('../config/config.php');
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data using $_POST superglobal
@@ -10,6 +8,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     $role = $_POST["role"];
 
+
+
+    // validate input
+    $errors = [];
+    if (empty($firstName)) {
+        $errors['fname'] = "First name is required";
+    }
+    if (empty($lastName)) {
+        $errors['lname'] = "Last name is required";
+    }
+    if (empty($email)) {
+        $errors['email'] = "Email is required";
+    }
+    if (empty($password)) {
+        $errors['password'] = "Password is required";
+    }
+    
+    else {
     // sanitize input
     $firstNameSanitized = sanitize($firstName);
     $lastNameSanitized = sanitize($lastName);
@@ -27,5 +43,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $passwordSanitizedAndHashed, 
         $roleSanitized, 
     );
-
+    }
 }

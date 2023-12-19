@@ -20,6 +20,10 @@ body {
     flex-direction: column;
 }
 
+label {
+    margin-bottom: 10px;
+}
+
 p{
     display: flex;
     align-items: center;
@@ -118,7 +122,7 @@ aside nav {
 aside{
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     border-right: 1px solid #ccc;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 aside nav ul {
@@ -162,6 +166,7 @@ aside nav ul li a {
 
 aside nav ul li a:hover {
     color: var(--color-purple);
+    cursor: pointer;
 }
 
 /* -----------------------------------new contact page styles--------------------------------------------- */
@@ -494,6 +499,8 @@ tr:nth-child(even) {
 
 
 /*---------------------------------------------add new contact page styles--------------------------------------------------- */
+
+
 #success-message {
     display: none;
     align-items: center;
@@ -504,9 +511,15 @@ tr:nth-child(even) {
     border-radius: 5px; 
     max-width: 50%;
     border: 2px solid #12a617;
-    transition: all 0.5s ease-in;
+    opacity: 0;
+    
 }
 
+#success-message.show {
+    display: flex;
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+}
 
 #success-message p {
     margin-right: 10px;
@@ -595,3 +608,8 @@ tr:nth-child(even) {
     padding: 20px;
     border-top: 1px solid var(--color-light-gray);
     }
+
+/*---------------------------------------------error Styles--------------------------------------------------- */
+.error {
+    color: red;
+}

@@ -10,7 +10,8 @@
 
 <body>
     <div class="container">
-        <header>
+        <header id="logo-wrapper">
+            <img src="../assets/images/dolphin.svg" alt="dolphin_logo">
             <p>Dolphin CRM</p>
         </header>
         

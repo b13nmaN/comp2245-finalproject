@@ -1,6 +1,4 @@
 <?php
-require_once('helpers.php');
-require_once('../config/config.php');
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data using $_POST superglobal
@@ -15,6 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
     
     // Call the addNewContact function
-    $success = addNote($conn, $contactIdSanitized, $commentSanitized, $createdBySanitized);
+    addNote($conn, $contactIdSanitized, $commentSanitized, $createdBySanitized);
 }
 ?>

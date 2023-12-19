@@ -3,9 +3,14 @@ $contactName = $_GET['contactId'] ?? null;
 $currentContact = getCurrentContact($conn, $contactName);
 $contact_id = $currentContact['id'];
 $notes = loadNotes($conn, $contact_id);
+$contact_id = $currentContact['id'];
+$notes = loadNotes($conn, $contact_id);
 ?>
 
+<?php include 'includes/process-new-note.php'; ?>
+
 <main>
+    </div>
     <div class="dashboard-header">
         <div class="dashboard-header-left">
             <div class="dashboard-header-title">
@@ -61,6 +66,8 @@ $notes = loadNotes($conn, $contact_id);
             <?php endforeach ?>  
         </div>
         <form action="../includes/process-new-note.php" method="post" id="note-form">
+            <input type="hidden" name="contact_id" value="<?php echo $currentContact['id']; ?>">
+            <input type="hidden" name="created_by" value="<?php echo $currentContact['firstname']; ?>">
             <input type="hidden" name="contact_id" value="<?php echo $currentContact['id']; ?>">
             <input type="hidden" name="created_by" value="<?php echo $currentContact['firstname']; ?>">
             <div class="grid-item row-6-span-2" style="margin-bottom: 20px;"> <!-- Added margin-bottom for space -->
