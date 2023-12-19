@@ -19,8 +19,8 @@ CREATE TABLE Contacts (
     telephone VARCHAR(255),
     company VARCHAR(255),
     type VARCHAR(255), 
-    assigned_to VARCHAR(255), 
-    created_by VARCHAR(255), 
+    assigned_to INT, 
+    created_by INT, 
     created_at DATETIME,
     updated_at DATETIME
 );
