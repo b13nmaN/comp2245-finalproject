@@ -7,8 +7,6 @@ $filteredArr = getFilterRequest($conn, $sanitizedInput);
 // get all all contacts
 $allContacts = getAllContacts($conn);
 
-var_dump($userData);
-
 if(!isset($_SESSION['user'])) {
     header("Location: /comp2245-finalproject/login.php");
 }
