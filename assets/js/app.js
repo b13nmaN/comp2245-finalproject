@@ -41,63 +41,118 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-
-    
     document.addEventListener('click', async (event) => {
         const target = event.target;
-
-        switch (true) {
-            case target.matches('#sales-lead'):
-                target.classList.add('active');
-                await handleFilterRequest('sales-lead');
-                break;
-
-            case target.matches('#support'):
-                target.classList.add('active');
-                await handleFilterRequest('support');
-                break;
-
-            case target.matches('#assigned-to-me'):
-                target.classList.add('active');
-                await handleFilterRequest('assigned-to-me');
-                break;
-
-            case target.matches('#all'):
-                target.classList.add('active');
-                await handleFilterRequest('all');
-                break;
-
-            case target.matches('.to-me'):
-                let user_id = target.getAttribute("data-user-id");
-                let contact_id = target.getAttribute("data-contact-id");
-                console.log('this is user id: ', user_id);
+    
+        // Check if the clicked element is a filter button
+        if (target.matches('.active-filter')) {
+            // Get all buttons with the class 'filter-button'
+            const filterButtons = document.querySelectorAll('.active-filter');
+    
+            // Remove 'active' class from all buttons
+            filterButtons.forEach(button => {
+                console.log(button);
+                button.classList.remove('active');
+            });
+    
+            // Add 'active' class to the clicked button
+            target.classList.add('active');
+    
+            // Handle filter request based on the clicked button
+            await handleFilterRequest(target.getAttribute("data-filter-type"));
+        } else {
+            // Handle other cases
+            switch (true) {
+                case target.matches('.to-me'):
+                    let user_id = target.getAttribute("data-user-id");
+                    let contact_id = target.getAttribute("data-contact-id");
+                    console.log('this is user id: ', user_id);
+                    
+                    await assignToMe(user_id, contact_id);
+                    break;
+    
+                case target.matches('.to-sales-lead'):
+                    let contact_type = target.getAttribute("data-contact-type");
+                    let contact_id_ = target.getAttribute("data-contact-id");
+                    await SwitchToLead(contact_type, contact_id_);
+                    break;
                 
-                await assignToMe(user_id, contact_id);
-                break;
-
-            case target.matches('.to-sales-lead'):
-                let contact_type = target.getAttribute("data-contact-type");
-                let contact_id_ = target.getAttribute("data-contact-id");
-                await SwitchToLead(contact_type, contact_id_);
-                break;
-            case target.matches('.add-contact'):
-                loadPage('/comp2245-finalproject/index.php/new-contact'
-                , '/comp2245-finalproject/index.php/new-contact');
-                break;
-
-            case target.matches('.add-user'):
-                let page = '/comp2245-finalproject/index.php/add-user';
-                loadPage(page);
-                window.history.pushState({ page: page }, null, page);
-                break;
-
-            case target.classList.contains('view-button'):
-                console.log("View button clicked");
-                let contactId = target.getAttribute("data-contact-id");
-                SendContactName(contactId);
-                break;
+                case target.matches('.add-contact'):
+                    loadPage('/comp2245-finalproject/index.php/new-contact'
+                    , '/comp2245-finalproject/index.php/new-contact');
+                    break;
+    
+                case target.matches('.add-user'):
+                    let page = '/comp2245-finalproject/index.php/add-user';
+                    loadPage(page);
+                    window.history.pushState({ page: page }, null, page);
+                    break;
+    
+                case target.classList.contains('view-button'):
+                    console.log("View button clicked");
+                    let contactId = target.getAttribute("data-contact-id");
+                    SendContactName(contactId);
+                    break;
+            }
         }
     });
+    
+    
+    // document.addEventListener('click', async (event) => {
+    //     const target = event.target;
+
+    //     switch (true) {
+    //         case target.matches('#sales-lead'):
+    //             target.classList.add('active');
+    //             await handleFilterRequest('sales-lead');
+    //             break;
+
+    //         case target.matches('#support'):
+    //             target.classList.add('active');
+    //             await handleFilterRequest('support');
+    //             break;
+
+    //         case target.matches('#assigned-to-me'):
+    //             target.classList.add('active');
+    //             await handleFilterRequest('assigned-to-me');
+    //             break;
+
+    //         case target.matches('#all'):
+    //             target.classList.add('active');
+    //             await handleFilterRequest('all');
+    //             break;
+
+    //         case target.matches('.to-me'):
+    //             let user_id = target.getAttribute("data-user-id");
+    //             let contact_id = target.getAttribute("data-contact-id");
+    //             console.log('this is user id: ', user_id);
+                
+    //             await assignToMe(user_id, contact_id);
+    //             break;
+
+    //         case target.matches('.to-sales-lead'):
+    //             let contact_type = target.getAttribute("data-contact-type");
+    //             let contact_id_ = target.getAttribute("data-contact-id");
+    //             await SwitchToLead(contact_type, contact_id_);
+    //             break;
+    //         case target.matches('.add-contact'):
+    //             loadPage('/comp2245-finalproject/index.php/new-contact'
+    //             , '/comp2245-finalproject/index.php/new-contact');
+    //             break;
+
+    //         case target.matches('.add-user'):
+    //             let page = '/comp2245-finalproject/index.php/add-user';
+    //             loadPage(page);
+    //             window.history.pushState({ page: page }, null, page);
+    //             break;
+
+    //         case target.classList.contains('view-button'):
+    //             console.log("View button clicked");
+    //             let contactId = target.getAttribute("data-contact-id");
+    //             SendContactName(contactId);
+    //             break;
+    //     }
+    // });
 
     document.addEventListener('submit', function (event) {
         if (event.target.tagName.toLowerCase() === 'form') {
@@ -136,11 +191,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     window.location.href = '/comp2245-finalproject/index.php/home';
                 } else{
                     submitForm(url);
+                    loadPage(url,url);
                 }
                 
                 setTimeout(() => {
                     displayMessage();
-                }, 1000);
+                }, 800);
             } else {
                 alert('Fields are empty, or email is empty or invalid. Not displaying success message.');
             }
@@ -304,10 +360,6 @@ async function SendContactName(contactId) {
             const parser = new DOMParser();
             const doc = parser.parseFromString(data, 'text/html');
             let main = doc.querySelector('main');
-
-            // Set the background color of the main element to white
-            main.style.backgroundColor = 'white';
-
             let mainToString = main.innerHTML;
             history.pushState({ contactId: contactId }, null, '/comp2245-finalproject/index.php/contact-details?contactId=' + contactId);
 

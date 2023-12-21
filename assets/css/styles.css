@@ -27,7 +27,6 @@ label {
 p{
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 
@@ -343,6 +342,7 @@ td:nth-child(4){
 
 td:last-child {
     border-right: 1px solid #ddd;
+    text-align: center;
 
 }
 
@@ -373,7 +373,9 @@ tr:nth-child(even) {
 
 
 /*------------------------------------------------------contact details page---------------------------------------------- */
-  
+#contact-details-page{
+    background-color: #fff;
+}
 .to-me{
     background-color: var(--color-green);
     color: #000;
@@ -487,6 +489,7 @@ tr:nth-child(even) {
     font-family: 'Material Icons';
     content: '\e745';
     font-size: 24px;
+    margin-right: 5px;
 }
 
 .notes-container, #note-form{
@@ -495,6 +498,18 @@ tr:nth-child(even) {
 
 #note-form{
     background-color: var(--color-light-gray);
+    display: flex;
+    flex-direction: column;
+}
+
+#note-form button{
+    float: right;
+    padding: 10px 25px;
+    margin-bottom: 10px;
+}
+
+#btn-wrapper{
+    width: 100%;
 }
 
 #comment{
@@ -533,7 +548,12 @@ tr:nth-child(even) {
     max-width: 50%;
     border: 2px solid #12a617;
     opacity: 0;
-    
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 #success-message.show {
@@ -541,6 +561,7 @@ tr:nth-child(even) {
     opacity: 1;
     transition: all 0.3s ease-in-out;
 }
+
 
 #success-message p {
     margin-right: 10px;

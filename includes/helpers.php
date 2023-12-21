@@ -184,10 +184,10 @@ function addNote($conn, $contact_id, $comment, $created_by){
 }
 
 // Function to load notes for a contact
-function loadNotes($conn, $contact_id){
-    $query = "SELECT comment, created_at, created_by FROM notes WHERE contact_id = :contact_id";
+function loadNotes($conn, $currentUserId){
+    $query = "SELECT comment, created_at, created_by FROM notes WHERE contact_id = :currentUserId ORDER BY created_at DESC";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':contact_id', $contact_id, PDO::PARAM_INT);
+    $stmt->bindParam(':currentUserId', $currentUserId, PDO::PARAM_INT);
     $stmt->execute();
 
     // Fetch notes
@@ -237,7 +237,7 @@ function updateContact($conn, $contact_id) {
 }
 
 function getContactsByUserId($conn, $user_id) {
-    $query = "SELECT * FROM contacts WHERE created_by = :user_id";
+    $query = "SELECT * FROM contacts WHERE assigned_to = :user_id";
     
     $stmt = $conn->prepare($query);
     $stmt->bindValue(':user_id', (int)$user_id, PDO::PARAM_INT);
