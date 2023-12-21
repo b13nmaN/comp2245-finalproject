@@ -4,6 +4,7 @@ $user = $users;
 
 
 include 'includes/process-new-contact.php';
+
 ?>
 
 <main>
@@ -66,7 +67,7 @@ include 'includes/process-new-contact.php';
         <div class="grid-item">
             <label for="type">Type</label>
             <select id="type" name="type">
-                <option value="Saleslead">Sales lead</option>
+                <option value="sales-lead">Sales lead</option>
                 <option value="support">Support</option>
             </select>
         </div>
@@ -75,12 +76,12 @@ include 'includes/process-new-contact.php';
             <label for="assign-to">Assign to</label>
             <select id="assign-to" name="assign-to">
                 <?php foreach ($users as $user) : ?>
-                    <option value="<?php echo $user['firstname']. ' ' .$user['lastname'] ; ?>">
+                    <option value="<?php echo $user['id'] ; ?>">
                     <?php echo $user['firstname']. ' ' .$user['lastname']; ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
-        <input type="hidden" name="created_by" value="<?php echo $userData['firstname']. ' ' .$userData['lastname']; ?>">
+        <input type="hidden" name="created_by" value="<?php echo $userData['id']; ?>">
 
         <div class="grid-item row-6-span-2">
             <button type="submit" class="save-button">Save</button>

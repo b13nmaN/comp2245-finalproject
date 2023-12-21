@@ -2,7 +2,6 @@
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    echo "test";
     // Retrieve form data using $_POST superglobal
     $title = $_POST["Title"];
     $firstName = $_POST["FirstName"];

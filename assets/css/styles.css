@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 /* Reset styles */
+
 * {
     margin: 0;
     padding: 0;
@@ -8,8 +10,8 @@
 /* ---------------------------------------------------General styles------------------------------------------------- */
 body {
     min-height: 100vh;
-    font-family: 'Inter'; font-size: 16px;
-    font-weight: 400;
+    font-family: 'Inter', sans-serif; 
+    font-size: 16px;
     /* overflow: hidden; */
 }
 
@@ -20,6 +22,11 @@ body {
 
 label {
     margin-bottom: 10px;
+}
+
+p{
+    display: flex;
+    align-items: center;
 }
 
 
@@ -39,11 +46,13 @@ label {
 
 /* 2 Column Layout */
 .container {
-    height: 100vh;
+    min-height: 100vh;
     display: grid;
     grid-template-columns: 15% 85%;
     grid-template-rows: auto 95%;
 }
+
+
 
 nav {
     background-color: var(--color-purple);
@@ -96,8 +105,6 @@ header {
 }
 
 header p {
-    display: flex;
-    align-items: center;
     margin-left: 10px;
     color: white;
 }
@@ -119,7 +126,6 @@ aside nav {
 aside{
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     border-right: 1px solid #ccc;
-    min-height: 100vh;
 }
 
 aside nav ul {
@@ -324,9 +330,26 @@ table {
     border: 1px solid #ddd;
 }
 
+td {
+    border-bottom: 1px solid #ddd; 
+    border-right: none;
+    padding: 8px; 
+}
+td:nth-child(4){
+    display: flex;
+    justify-content: center;
+}
+
+td:last-child {
+    border-right: 1px solid #ddd;
+    text-align: center;
+
+}
+
+
 /* Style the table headers */
 
-th, td {
+th{
     border: 1px solid #ddd;
     padding: 5px;
     text-align: left;
@@ -350,7 +373,9 @@ tr:nth-child(even) {
 
 
 /*------------------------------------------------------contact details page---------------------------------------------- */
-  
+#contact-details-page{
+    background-color: #fff;
+}
 .to-me{
     background-color: var(--color-green);
     color: #000;
@@ -385,6 +410,121 @@ tr:nth-child(even) {
     margin-right: 10px;
 }
 
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+
+.dashboard-header-right{
+    display: flex;
+    justify-content: space-between;
+}
+.dashboard-header-left{
+    display: flex;
+}
+.dashboard-header-left::before{
+    font-family: 'Material Icons';
+    content: '\e853';
+    font-size: 56px;
+    color: #ccc;
+    margin-right: 2px;
+}
+
+.dashboard-header-title p:first-child{
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.dashboard-header-title p:not(p:first-child){
+    font-size: 12px;
+    font-weight:600;
+    color: #ccc;
+}
+
+
+.dashboard-header-right button:first-child{
+    margin-right: 5px;
+}
+
+.contact-info-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px; 
+    box-sizing: border-box;
+}
+
+.contact-info-container p {
+    margin: 0;
+    padding: 5px;
+}
+.info-section {
+    margin-bottom: 5px;
+}
+
+.info-heading {
+    margin: 0;
+    font-weight: bold;
+}
+
+#section-1 {
+    padding: 20px;
+}
+#section-2 {
+    padding: 0px;
+}
+
+.note{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.note-icon{
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+}
+.note-icon p::before{
+    font-family: 'Material Icons';
+    content: '\e745';
+    font-size: 24px;
+    margin-right: 5px;
+}
+
+.notes-container, #note-form{
+    padding: 0 20px;
+}
+
+#note-form{
+    background-color: var(--color-light-gray);
+    display: flex;
+    flex-direction: column;
+}
+
+#note-form button{
+    float: right;
+    padding: 10px 25px;
+    margin-bottom: 10px;
+}
+
+#btn-wrapper{
+    width: 100%;
+}
+
+#comment{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    resize: none;
+}
+
+.contact-details{
+    background-color: #fff;
+}
+
 
 
 /*---------------------------------------------users page styles--------------------------------------------------- */
@@ -408,7 +548,12 @@ tr:nth-child(even) {
     max-width: 50%;
     border: 2px solid #12a617;
     opacity: 0;
-    
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 #success-message.show {
@@ -416,6 +561,7 @@ tr:nth-child(even) {
     opacity: 1;
     transition: all 0.3s ease-in-out;
 }
+
 
 #success-message p {
     margin-right: 10px;
