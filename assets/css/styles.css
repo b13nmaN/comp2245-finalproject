@@ -27,7 +27,10 @@ label {
 p{
     display: flex;
     align-items: center;
+    justify-content: center;
 }
+
+
 /* Variables */
 :root {
     /* dark blue */
@@ -328,9 +331,25 @@ table {
     border: 1px solid #ddd;
 }
 
+td {
+    border-bottom: 1px solid #ddd; 
+    border-right: none;
+    padding: 8px; 
+}
+td:nth-child(4){
+    display: flex;
+    justify-content: center;
+}
+
+td:last-child {
+    border-right: 1px solid #ddd;
+
+}
+
+
 /* Style the table headers */
 
-th, td {
+th{
     border: 1px solid #ddd;
     padding: 5px;
     text-align: left;
@@ -490,6 +509,7 @@ tr:nth-child(even) {
 .contact-details{
     background-color: #fff;
 }
+
 
 
 /*---------------------------------------------users page styles--------------------------------------------------- */

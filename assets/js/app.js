@@ -59,7 +59,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
             case target.matches('#assigned-to-me'):
                 target.classList.add('active');
-                await handleFilterRequest('assigned_to_me');
+                await handleFilterRequest('assigned-to-me');
+                break;
+
+            case target.matches('#all'):
+                target.classList.add('active');
+                await handleFilterRequest('all');
                 break;
 
             case target.matches('.to-me'):

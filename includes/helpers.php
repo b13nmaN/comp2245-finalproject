@@ -236,6 +236,19 @@ function updateContact($conn, $contact_id) {
     $updateStmt->execute();
 }
 
+function getContactsByUserId($conn, $user_id) {
+    $query = "SELECT * FROM contacts WHERE created_by = :user_id";
+    
+    $stmt = $conn->prepare($query);
+    $stmt->bindValue(':user_id', (int)$user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $contacts;
+}
+
+
 
 ?>
 

@@ -67,7 +67,7 @@ include 'includes/process-new-contact.php';
         <div class="grid-item">
             <label for="type">Type</label>
             <select id="type" name="type">
-                <option value="Saleslead">Sales lead</option>
+                <option value="sales-lead">Sales lead</option>
                 <option value="support">Support</option>
             </select>
         </div>
