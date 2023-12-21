@@ -7,6 +7,7 @@ $filteredArr = getFilterRequest($conn, $sanitizedInput);
 // get all all contacts
 $allContacts = getAllContacts($conn);
 
+
 if(!isset($_SESSION['user'])) {
     header("Location: /comp2245-finalproject/login.php");
 }
@@ -16,6 +17,7 @@ if(!isset($_SESSION['user'])) {
 
 
 <main>
+
     <div class="dashboard-header">
         <h2>Dashboard</h2>
         <button class="add-contact btn-primary">Add Contact</button>
@@ -66,7 +68,7 @@ if(!isset($_SESSION['user'])) {
                         <td><?= $contact['email'] ?></td>
                         <td><?= $contact['company'] ?></td>
                         <td><?= $contact['type'] ?></td>
-                        <td><p class="view-button"  data-contact-id="<?= $contact['firstname'] ?>">View</p></td>
+                        <td><p class="view-button"  data-contact-id="<?= $contact['id'] ?>">View</p></td>
                     </tr>
                 <?php endforeach; ?>
             </table>

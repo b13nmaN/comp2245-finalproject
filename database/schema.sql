@@ -30,6 +30,6 @@ CREATE TABLE Notes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     contact_id INT,
     comment TEXT,
-    created_by VARCHAR(255),
+    created_by INT,
     created_at DATETIME
 );

@@ -69,10 +69,10 @@ function getAllUsers($conn){
 }
 
 // Function to get a specific contact by name
-function getCurrentContact($conn, $contactName) {
-    $query = "SELECT * FROM contacts WHERE firstname = :firstname";
+function getCurrentContact($conn, $contactId) {
+    $query = "SELECT * FROM contacts WHERE id = :id";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':firstname', $contactName);
+    $stmt->bindParam(':id', $contactId);
     $stmt->execute();
     $currentContact = $stmt->fetch(PDO::FETCH_ASSOC);
     return $currentContact;
@@ -113,12 +113,20 @@ function getAllContacts($conn) {
 
 
 // Function to filter contacts
-function getFilterRequest($conn, $filterType){
+function getFilterRequest($conn, $filterType) {
     // Implement logic to filter contacts based on filterType
-    // Placeholder logic, you need to replace this with actual logic
-    $query = "SELECT * FROM contacts WHERE type = :filterType";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(':filterType', $filterType);
+    if (is_string($filterType)) {
+        // If $filterType is a string, filter by type
+        $query = "SELECT * FROM contacts WHERE type = :filterType";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':filterType', $filterType);
+    } else {
+        // If $filterType is not a string, assume it's an ID and filter by assigned_to field
+        $query = "SELECT * FROM contacts WHERE assigned_to = :filterId";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':filterId', $filterType);
+    }
+
     $stmt->execute();
 
     // Fetch filtered data
@@ -126,6 +134,7 @@ function getFilterRequest($conn, $filterType){
 
     return $filteredData;
 }
+
 
 // Function to load contact details
 function loadDetails($conn, $id){
@@ -143,22 +152,24 @@ function loadDetails($conn, $id){
 }
 
 // Function to assign contact to self
-function assignToMe($conn, $username, $id){
-    $query = "UPDATE contacts SET assigned_to = :username WHERE id = :id";
+function assignToMe($conn, $user_id, $contact_id){
+    var_dump($user_id, $contact_id);
+    $query = "UPDATE contacts SET assigned_to = :user_id WHERE id = :contact_id";
     $stmt = $conn->prepare($query);
-    $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->bindParam(':contact_id', $contact_id, PDO::PARAM_INT);
     $stmt->execute();
 }
 
 // Function to switch role to sales lead
-function switchMeToSalesLead($conn, $id){
+function switchRole($conn, $id, $role){
     // Implement logic to update type field in the contact row
     // Switch to sales lead role
     // Placeholder logic, you need to replace this with actual logic
-    $query = "UPDATE contacts SET type = 'sales lead' WHERE id = :id";
+    $query = "UPDATE contacts SET type = :role WHERE id = :id";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':role', $role);
     $stmt->execute();
 }
 
@@ -186,7 +197,45 @@ function loadNotes($conn, $contact_id){
 }
 
 
-// Create functions to validate email and telephone number
+function getCreatorName($conn, $created_by_user_id) {
+    $query = "SELECT u.firstname, u.lastname
+                FROM users u
+                JOIN contacts c ON u.id = c.created_by
+                WHERE c.id = :created_by_user_id";
+    
+    $stmt = $conn->prepare($query);
+    $stmt->bindValue('created_by_user_id', (int)$created_by_user_id, PDO::PARAM_INT); // use bindValue instead of bindParam
+    $stmt->execute();
+    
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    return $user;
+}
+
+function getAssignedTo($conn, $assigned_to_user_id) {
+    $query = "SELECT u.firstname, u.lastname
+                FROM users u
+                JOIN contacts c ON u.id = c.assigned_to
+                WHERE c.id = :assigned_to_user_id";
+    
+    $stmt = $conn->prepare($query);
+    $stmt->bindValue('assigned_to_user_id', (int)$assigned_to_user_id, PDO::PARAM_INT); // use bindValue instead of bindParam
+    $stmt->execute();
+    
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    return $user;
+}
+
+function updateContact($conn, $contact_id) {
+    // Update the `updated_at` field for the specified contact ID
+    $updateQuery = "UPDATE contacts SET updated_at = NOW() WHERE id = :contact_id";
+    
+    $updateStmt = $conn->prepare($updateQuery);
+    $updateStmt->bindValue(':contact_id', (int)$contact_id, PDO::PARAM_INT);
+    $updateStmt->execute();
+}
+
 
 ?>
 

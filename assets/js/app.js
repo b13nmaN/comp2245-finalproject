@@ -43,40 +43,56 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     
-document.addEventListener('click', async (event) => {
-    const target = event.target;
+    document.addEventListener('click', async (event) => {
+        const target = event.target;
 
-    switch (true) {
-        case target.matches('#sales-lead'):
-            target.classList.add('active');
-            await handleFilterRequest('sales-lead');
-            break;
+        switch (true) {
+            case target.matches('#sales-lead'):
+                target.classList.add('active');
+                await handleFilterRequest('sales-lead');
+                break;
 
-        case target.matches('#support'):
-            target.classList.add('active');
-            await handleFilterRequest('support');
-            break;
+            case target.matches('#support'):
+                target.classList.add('active');
+                await handleFilterRequest('support');
+                break;
 
-        case target.matches('.add-contact'):
-            loadPage('/comp2245-finalproject/index.php/new-contact');
-            break;
+            case target.matches('#assigned-to-me'):
+                target.classList.add('active');
+                await handleFilterRequest('assigned_to_me');
+                break;
 
-        case target.matches('.add-user'):
-            let page = '/comp2245-finalproject/index.php/add-user';
-            loadPage(page);
-            window.history.pushState({ page: page }, null, page);
-            break;
+            case target.matches('.to-me'):
+                let user_id = target.getAttribute("data-user-id");
+                let contact_id = target.getAttribute("data-contact-id");
+                console.log('this is user id: ', user_id);
+                
+                await assignToMe(user_id, contact_id);
+                break;
 
-        case target.classList.contains('view-button'):
-            console.log("View button clicked");
-            let contactId = target.getAttribute("data-contact-id");
-            SendContactName(contactId, '/comp2245-finalproject/index.php/contact-details');
-            break;
-    }
-});
+            case target.matches('.to-sales-lead'):
+                let contact_type = target.getAttribute("data-contact-type");
+                let contact_id_ = target.getAttribute("data-contact-id");
+                await SwitchToLead(contact_type, contact_id_);
+                break;
+            case target.matches('.add-contact'):
+                loadPage('/comp2245-finalproject/index.php/new-contact'
+                , '/comp2245-finalproject/index.php/new-contact');
+                break;
 
+            case target.matches('.add-user'):
+                let page = '/comp2245-finalproject/index.php/add-user';
+                loadPage(page);
+                window.history.pushState({ page: page }, null, page);
+                break;
 
-
+            case target.classList.contains('view-button'):
+                console.log("View button clicked");
+                let contactId = target.getAttribute("data-contact-id");
+                SendContactName(contactId);
+                break;
+        }
+    });
 
     document.addEventListener('submit', function (event) {
         if (event.target.tagName.toLowerCase() === 'form') {
@@ -85,7 +101,7 @@ document.addEventListener('click', async (event) => {
             
             // Check for empty fields or empty email field
             const form = event.target;
-            const inputs = form.querySelectorAll('input');
+            const inputs = form.querySelectorAll('input, textarea'); ;
             let isEmpty = false;
             let isEmailValid = true;
     
@@ -111,9 +127,9 @@ document.addEventListener('click', async (event) => {
             if (!isEmpty && isEmailValid) {
                 let url = window.location.href;
                 if(url.includes('login.php')){
-                    submitForm(url);
+                    submitLoginForm(url);
                     window.location.href = '/comp2245-finalproject/index.php/home';
-                }else{
+                } else{
                     submitForm(url);
                 }
                 
@@ -121,7 +137,7 @@ document.addEventListener('click', async (event) => {
                     displayMessage();
                 }, 1000);
             } else {
-                console.log('Fields are empty, or email is empty or invalid. Not displaying success message.');
+                alert('Fields are empty, or email is empty or invalid. Not displaying success message.');
             }
         }
     });
@@ -150,7 +166,7 @@ document.addEventListener('click', async (event) => {
     history.pushState(null, null, window.location.href);
 
 
-function loadPage(page) {
+function loadPage(page, url) {
     fetch(page)
         .then(response => response.text())
         .then(data => {
@@ -163,7 +179,9 @@ function loadPage(page) {
             let mainToString = main.innerHTML
             console.log(main);
             // Update the content area with the loaded HTML
-            document.querySelector('main').innerHTML = mainToString; // Use querySelector instead of getElementsByClassName
+            document.querySelector('main').innerHTML = mainToString;
+            // Use the History API to change the URL without refreshing
+            history.pushState({ page: page }, null, url);
         })
         .catch(error => console.error('Error:', error));
     }
@@ -177,25 +195,38 @@ function loadPage(page) {
         })
             .then(response => response.text())
             .then(data => {
+
                 // Parse HTML to get main element
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(data, 'text/html');
     
                 let main = doc.querySelector('main');
-    
-                if (main) {
-                    let mainToString = main.innerHTML;
-                    document.querySelector('main').innerHTML = mainToString;
-                }
+                console.log('this is main: ', main);
+                
+                let mainToString = main.innerHTML;
+                document.querySelector('main').innerHTML = mainToString;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+    function submitLoginForm(page) {
+        fetch(page, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(new FormData(document.querySelector('form')))
+        })
+            .then(response => response.text())
+            .then(data => {
+                // Parse HTML to get main element
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data, 'text/html');
     
                     // Check if main has a body element
                 let body = doc.querySelector('body');
-
-                if (body) {
                     let bodyToString = body.innerHTML;
                     console.log('Main has a body element:', body);
                     document.querySelector('body').innerHTML = bodyToString;
-                } 
             })
             .catch(error => console.error('Error:', error));
     }
@@ -221,6 +252,46 @@ async function handleFilterRequest(filterType) {
         })
 }
 
+
+
+async function assignToMe(user_id, contact_id) {
+    await fetch(`/comp2245-finalproject/index.php/contact-details?contactId=${contact_id}&userId=${user_id}`)
+        .then(response => response.text())
+        .then(data => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, 'text/html');
+            let main = doc.querySelector('main');
+            console.log('this is main: ', main);
+            let mainToString = main.innerHTML;
+
+            // Update the content area with the loaded HTML
+            document.querySelector('main').innerHTML = mainToString;
+
+            // Use the location.href to reload the page with the updated URL
+            history.pushState({ contactId: contact_id, userId: user_id }, null, `/comp2245-finalproject/index.php/contact-details?contactId=${contact_id}&userId=${user_id}`);
+        });
+}
+async function SwitchToLead(type, contact_id) {
+    await fetch(`/comp2245-finalproject/index.php/contact-details?contactId=${contact_id}&type=${type}`)
+        .then(response => response.text())
+        .then(data => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, 'text/html');
+            let main = doc.querySelector('main');
+            console.log('this is main: ', main);
+            let mainToString = main.innerHTML;
+
+            // Update the content area with the loaded HTML
+            document.querySelector('main').innerHTML = mainToString;
+
+            // Use the location.href to reload the page with the updated URL
+            history.pushState({ contactId: contact_id, type: type }, null, `/comp2245-finalproject/index.php/contact-details?contactId=${contact_id}&type=${type}`);
+        });
+}
+
+
+
+
 async function SendContactName(contactId) {
     await fetch('/comp2245-finalproject/index.php/contact-details?contactId=' + contactId)
         .then(response => response.text())
@@ -233,6 +304,7 @@ async function SendContactName(contactId) {
             main.style.backgroundColor = 'white';
 
             let mainToString = main.innerHTML;
+            history.pushState({ contactId: contactId }, null, '/comp2245-finalproject/index.php/contact-details?contactId=' + contactId);
 
             // Update the content area with the loaded HTML
             document.querySelector('main').innerHTML = mainToString;

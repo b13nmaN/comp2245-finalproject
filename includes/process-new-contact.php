@@ -2,7 +2,6 @@
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    echo "test";
     // Retrieve form data using $_POST superglobal
     $title = $_POST["Title"];
     $firstName = $_POST["FirstName"];
@@ -50,18 +49,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $created_bySanitized = sanitize($created_by);
 
         // Call the addNewContact function
-        addNewContact(
-            $conn, 
-            $titleSanitized, 
-            $firstNameSanitized, 
-            $lastNameSanitized, 
-            $emailSanitized, 
-            $telephoneSanitized, 
-            $companySanitized, 
-            $typeSanitized, 
-            $assigned_toSanitized,
-            $created_bySanitized
-        );
+        // addNewContact(
+        //     $conn, 
+        //     $titleSanitized, 
+        //     $firstNameSanitized, 
+        //     $lastNameSanitized, 
+        //     $emailSanitized, 
+        //     $telephoneSanitized, 
+        //     $companySanitized, 
+        //     $typeSanitized, 
+        //     $assigned_toSanitized,
+        //     $created_bySanitized
+        // );
 
     }
 }
